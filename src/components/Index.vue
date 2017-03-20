@@ -1,21 +1,21 @@
 <template>
 	<div>
 		<router-view></router-view>
-		<tabber>
-    		<tabber-item>
+		<tabbar>
+    		<tabbar-item>
     			<span slot = 'label'>主页</span>
-    		</tabber-item>
-    		<tabber-item>
+    		</tabbar-item>
+    		<tabbar-item>
     			<span slot = 'label'>我的</span>
-    		</tabber-item>
-    	</tabber>
+    		</tabbar-item>
+    	</tabbar>
 	</div>
 </template>
 <script>
 	import { Tabbar, TabbarItem } from 'vux'
 	export default {
-		components:{
-			Tabbar,
+  		components: {
+    		Tabbar,
     		TabbarItem
   		}
 	}

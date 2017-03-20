@@ -1,5 +1,5 @@
 <template>
-	<div>dfsad</div>
+	<div></div>
 </template>
 <script>
 	export default {
