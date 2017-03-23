@@ -9,6 +9,9 @@ import router from './router'
 import filter from './filter'
 
 
+// httpInterceptor
+import {request, response} from './service/httpInterceptor';
+
 FastClick.attach(document.body)
 
 Vue.config.productionTip = false

@@ -1,0 +1,42 @@
+/*修改mt-header*/
+.mint-header{
+	height: 1.173333rem !important;
+  background-color: white !important;
+  color:black !important;
+  margin-bottom:0.133333rem}
+
+.mintui{
+  font-size: 20px !important;
+}
+.mint-header h1{
+	font-size: 16px;
+}
+
+
+
+/*修改mt-cell*/
+#app .mint-cell{
+  min-height: 1.146667rem;
+}
+#app .mint-cell-wrapper{
+  font-size: 0.4rem;
+}
+.mine .mine-list .mint-cell-text{
+  padding-left: 0.453333rem;
+  font-size: 0.4rem;
+}
+
+/*mt-btn*/
+#app .mint-button{
+  font-size: 0.453333rem;
+}
+
+
+.mint-msgbox{
+  border-radius: 10px !important;
+}
+
+.mint-msgbox .mint-msgbox-message{
+  line-height: 24px;
+  color: #000;
+}

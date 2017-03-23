@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style lang='scss'>
-
+@import '../static/lib/icon-font/iconfont.css';
 
 </style>
 <style lang="less">
