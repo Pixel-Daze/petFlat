@@ -5,6 +5,10 @@ Vue.use(Router)
 const Index = resolve => require(['../components/Index'],resolve)
 const PetIndex = resolve => require(['../components/petIndex/PetIndex'],resolve)
 
+const PetOrder = resolve => require(['../components/petOrder/PetOrder'],resolve)
+
+const PetMine = resolve => require(['../components/petMine/PetMine'],resolve)
+
 const scrollBehavior = (to, from, savedPosition) => {
   	if (savedPosition) {
     	// savedPosition is only available for popstate navigations.
@@ -34,7 +38,9 @@ const router = new Router({
 	scrollBehavior,
   	routes: [
     	{name:'Index',path:'/index',component:Index,children:[
-    		{name:'PetIndex',path:'petIndex',component:PetIndex}
+    		{name:'PetIndex',path:'petIndex',component:PetIndex},
+        {name:'PetOrder',path:'petOrder',component:PetOrder},
+        {name:'PetMine',path:'petMine',component:PetMine}
     	]},
     	{path: '*', redirect: '/index/petIndex'}
   	]

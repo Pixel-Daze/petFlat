@@ -12,6 +12,9 @@ import filter from './filter'
 // httpInterceptor
 import {request, response} from './service/httpInterceptor';
 
+import Plugin from './plugin/vue.ext.js'
+Vue.use(Plugin)
+
 FastClick.attach(document.body)
 
 Vue.config.productionTip = false
