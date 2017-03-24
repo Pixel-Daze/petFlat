@@ -23,6 +23,10 @@ export default{
             }else{
                 return null;
             }
+        },
+        // 全局返回函数
+        Vue.prototype.back=()=>{
+            history.back()
         }
 
 	}

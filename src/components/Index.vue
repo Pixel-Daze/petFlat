@@ -57,6 +57,7 @@
 <style lang='scss'>
     @import '../../static/lib/base/config.scss';
 	.main_wrapper{
+        height: 100%;
         .weui-tabbar{
             background-color: #fff;
             position: fixed;

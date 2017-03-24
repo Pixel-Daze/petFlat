@@ -9,6 +9,9 @@ const PetOrder = resolve => require(['../components/petOrder/PetOrder'],resolve)
 
 const PetMine = resolve => require(['../components/petMine/PetMine'],resolve)
 
+const SignIn = resolve => require(['../components/sign/SignIn'],resolve)
+const SignUp = resolve => require(['../components/sign/SignUp'],resolve)
+
 const scrollBehavior = (to, from, savedPosition) => {
   	if (savedPosition) {
     	// savedPosition is only available for popstate navigations.
@@ -42,6 +45,8 @@ const router = new Router({
         {name:'PetOrder',path:'petOrder',component:PetOrder},
         {name:'PetMine',path:'petMine',component:PetMine}
     	]},
+      {name:'SignIn',path:'/signIn',component:SignIn},
+      {name:'SignUp',path:'/signUp',component:SignUp},
     	{path: '*', redirect: '/index/petIndex'}
   	]
 })
