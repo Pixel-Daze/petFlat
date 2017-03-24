@@ -51,9 +51,15 @@
 	}
 </script>
 <style lang='scss'>
+	@import '../../../static/lib/base/config.scss';
 	.petIndex{
 		.pet_container{
 			padding-top: 1.333333rem;
+			.weui-search-bar{
+				.weui-search-bar__cancel-btn{
+					color: $primary-color;
+				}
+			}
 			.pet_search{
 				/*z-index: 10;*/
 			}

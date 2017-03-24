@@ -1,0 +1,19 @@
+{
+  "result": 0,
+  "msg": "成功",
+  "data": [
+    {
+        "PetCode":"2017022801",
+        "ImgUrl":"http://www.95599.cn/jiangsu/intro/jsweixintest/ABCWeJS/dist/static/img/mall/product.png",
+        "PetName":"哈士奇",
+        "PetType":"狗",
+        "PetSex":"0",
+        "PetOld":"4",
+        "PetSter":"0",
+        "PetImmune":"0",
+        "PetFeature":["聪明","短毛"],
+        "PetDescription":"极品超小体",
+        "Area":"南京"
+    }
+  ]
+}

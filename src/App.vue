@@ -12,7 +12,9 @@ export default {
 
 <style lang='scss'>
 @import '../static/lib/icon-font/iconfont.css';
-
+*{
+	box-sizing: border-box;
+}
 </style>
 <style lang="less">
 @import '~vux/src/styles/reset.less';
