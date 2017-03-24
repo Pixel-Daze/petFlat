@@ -23,7 +23,7 @@ a:hover{
 <style lang="less">
 @import '~vux/src/styles/reset.less';
 @import '~vux/src/styles/1px.less';
-html,body {
+html,body,#app {
 	height:100%;
   	background-color: #fbf9fe;
 }

@@ -4,12 +4,12 @@
 			<div class="user-icon">
 				<span>游客</span>
 			</div>
-			<div class="detail-info">
+			<div class="detail-info" @click="signIn">
 				<div class="user-name">
 			  		<span>游客</span>
 			  		<img src="../../../static/img/mine/weirenz@2x.png" alt="">
 			  	</div>
-			  	<div class="login">登录</div>
+			  	<div class="login" >登录</div>
 			</div>
 			<div class="right">
 				<span class="icon iconfont icon-back"></span>
@@ -36,7 +36,9 @@
 		    Cell
 		},
 		methods:{
-
+			signIn(){
+				this.$router.push({name:'SignIn'})
+			}
 		}
 	}
 </script>

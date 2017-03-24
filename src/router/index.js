@@ -11,6 +11,7 @@ const PetMine = resolve => require(['../components/petMine/PetMine'],resolve)
 
 const SignIn = resolve => require(['../components/sign/SignIn'],resolve)
 const SignUp = resolve => require(['../components/sign/SignUp'],resolve)
+const Protocol = resolve => require(['../components/sign/Protocol'],resolve)
 
 const scrollBehavior = (to, from, savedPosition) => {
   	if (savedPosition) {
@@ -47,6 +48,7 @@ const router = new Router({
     	]},
       {name:'SignIn',path:'/signIn',component:SignIn},
       {name:'SignUp',path:'/signUp',component:SignUp},
+      {name:'Protocol',path:'/protocol',component:Protocol},
     	{path: '*', redirect: '/index/petIndex'}
   	]
 })

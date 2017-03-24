@@ -12,3 +12,11 @@
 .vux-header .vux-header-title, .vux-header h1{
   color: #000 !important;
 }
+
+.fix-header{
+    width: 100%;
+    position: fixed !important;
+    left: 0px;
+    top: 0px;
+    z-index: 100;
+}

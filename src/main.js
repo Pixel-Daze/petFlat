@@ -8,6 +8,9 @@ import axios from 'axios'
 import router from './router'
 import filter from './filter'
 
+import  { ToastPlugin } from 'vux'
+Vue.use(ToastPlugin)
+
 
 // httpInterceptor
 import {request, response} from './service/httpInterceptor';
