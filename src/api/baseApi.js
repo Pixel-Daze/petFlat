@@ -16,3 +16,15 @@ export function getProtocolInfo(){
 		},reject)
 	})
 }
+
+// 获取宠物信息列表
+export function getPetList(){
+	return new Promise((resolve,reject)=>{
+		axios({
+			method:'get',
+			url:'../static/json/petlist.json'
+		}).then((resp) =>{
+			resolve(resp)
+		},reject)
+	})
+}

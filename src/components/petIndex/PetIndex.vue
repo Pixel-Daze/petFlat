@@ -3,13 +3,16 @@
 		<index-header></index-header>
 		<div class="pet_container">
 			<search class="pet_search" @result-click="resultClick" @on-change="getResult" :results="results" v-model="value" position="absolute" auto-scroll-to-top top="0px" @on-focus="onFocus" @on-cancel="onCancel" :class="searchkey"></search>
+			<pet-list :petList="PetList" @choosePet="choosePet"></pet-list>
 		</div>
 		
 	</div>
 </template>
 <script>
 	import { Search } from 'vux'
+	import {mapGetters} from 'vuex'
 	import IndexHeader from './IndexComponent/IndexHeader'
+	import PetList from './IndexComponent/PetList'
 	export default {
 		data(){
 			return {
@@ -17,7 +20,8 @@
 				value: '搜索宠物',
 				searchkey:{
 					'pet_search_focus':false
-				}
+				},
+				PetList:[]
 			}
 		},
 		methods: {
@@ -32,11 +36,37 @@
 		    },
 		    onCancel () {
 		      this.searchkey['pet_search_focus'] = false
+		    },
+		    choosePet(item){
+		    	console.log(item)
+		    },
+		    loadInfo(){
+		    	this.getIndexList()
+		    },
+		    getIndexList(){
+		    	let vm = this,petList = vm.$store.getters.activeIndexPetList
+		    	if(petList.length==0){
+		    		vm.$store.dispatch('FETCH_INDEX_PETLIST').then(()=>{
+		    			petList = vm.$store.getters.activeIndexPetList
+		    			vm.PetList = petList
+		    		})
+		    	}else{
+		    		vm.PetList = petList
+		    	}
 		    }
 		},
 		components:{
 			Search,
-			IndexHeader
+			IndexHeader,
+			PetList
+		},
+		computed:{
+			...mapGetters([
+				'activeIndexPetList'
+			])
+		},
+		created(){
+			this.loadInfo()
 		}
 	}
 	function getResult (val) {

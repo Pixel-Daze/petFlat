@@ -7,6 +7,7 @@ import axios from 'axios'
 
 import router from './router'
 import filter from './filter'
+import store from './store'
 
 import  { ToastPlugin } from 'vux'
 Vue.use(ToastPlugin)
@@ -26,6 +27,7 @@ Vue.config.productionTip = false
 new Vue({
   router,
   filter,
+  store,
   el:'#app-box',
   render: h => h(App)
   
