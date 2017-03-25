@@ -11,7 +11,20 @@
         "PetOld":"4",
         "PetSter":"0",
         "PetImmune":"0",
-        "PetFeature":["聪明","短毛"],
+        "PetFeature":["可爱","短毛"],
+        "PetDescription":"极品超小体",
+        "Area":"南京"
+    },
+    {
+        "PetCode":"2017022801",
+        "ImgUrl":"http://www.95599.cn/jiangsu/intro/jsweixintest/ABCWeJS/dist/static/img/mall/product.png",
+        "PetName":"博美",
+        "PetType":"狗",
+        "PetSex":"1",
+        "PetOld":"4",
+        "PetSter":"0",
+        "PetImmune":"0",
+        "PetFeature":["聪明","小公主"],
         "PetDescription":"极品超小体",
         "Area":"南京"
     }
