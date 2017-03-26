@@ -28,3 +28,15 @@ export function getPetList(){
 		},reject)
 	})
 }
+
+// 用户登录
+export function signin(body) {
+	return new Promise((resolve,reject)=>{
+		axios({
+			method:'get',
+			url:'../static/json/userInfo.json'
+		}).then((resp) =>{
+			resolve(resp)
+		},reject)
+	})
+}

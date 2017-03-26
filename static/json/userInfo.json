@@ -1,0 +1,12 @@
+{
+  "result": 0,
+  "msg": "成功",
+  "data": {
+    "username":"发发呆哟",
+    "userIcon":"http://www.95599.cn/jiangsu/intro/jsweixintest/ABCWeJS/dist/static/img/mall/product.png",
+    "phone":"15705213522",
+    "area":"南京",
+    "description":"高甜",
+    "auth":true
+  }
+}

@@ -85,6 +85,7 @@
 	.petIndex{
 		.pet_container{
 			padding-top: 1.333333rem;
+			padding-bottom: 63px;
 			.weui-search-bar{
 				.weui-search-bar__cancel-btn{
 					color: $primary-color;

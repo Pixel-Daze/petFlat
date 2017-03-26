@@ -1,10 +1,10 @@
 <template>
 	<div class="petMine">
-		<div class="user-info">
+		<div class="user-info" v-show="!auth" @click="signIn">
 			<div class="user-icon">
 				<span>游客</span>
 			</div>
-			<div class="detail-info" @click="signIn">
+			<div class="detail-info">
 				<div class="user-name">
 			  		<span>游客</span>
 			  		<img src="../../../static/img/mine/weirenz@2x.png" alt="">
@@ -15,14 +15,29 @@
 				<span class="icon iconfont icon-back"></span>
 			</div>
 		</div>
+		<div class="user-info" v-show="auth">
+			<div class="user-icon">
+				<img :src="user.userIcon" alt="">
+			</div>
+			<div class="detail-info" >
+				<div class="user-name">
+			  		<span v-if="user.username">{{user.username}}</span>
+			  		<span v-else>认证用户</span>
+			  		<img src="../../../static/img/mine/yirenz@2x.png" alt="">
+			  	</div>
+			</div>
+			<div class="right">
+				<span class="icon iconfont icon-back"></span>
+			</div>
+		</div>
 		<group class="mine_opt">
-		    <cell title="我的发布" is-link>
+		    <cell title="我的发布" is-link >
 		    	<span slot="icon" class="icon iconfont icon-maobi"></span>
 		    </cell>
 		    <cell title="收藏" is-link>
 		    	<span slot="icon" class="icon iconfont icon-shoucang"></span>
 		    </cell>
-		    <cell title="编辑资料" is-link>
+		    <cell title="编辑资料" is-link @click.native="goEdit">
 		    	<span slot="icon" class="icon iconfont icon-shezhi"></span>
 		    </cell>
 		</group>
@@ -31,6 +46,12 @@
 <script>
 	import { Cell, Group } from 'vux'
 	export default {
+		data(){
+			return {
+				user:{},
+				auth:false
+			}
+		},
 		components: {
 		    Group,
 		    Cell
@@ -38,7 +59,27 @@
 		methods:{
 			signIn(){
 				this.$router.push({name:'SignIn'})
+			},
+			goEdit(){
+				let vm = this
+				if(vm.auth){
+					this.$router.push({name:'EditUser'})
+				}else{
+					vm.signIn()
+				}
+			},
+			loadInfo(){
+				let vm = this
+				if(vm.isSignIn()){
+					vm.user = JSON.parse(sessionStorage.getItem('user'))
+					vm.auth = true
+				}else{
+					vm.auth = false
+				}
 			}
+		},
+		mounted(){
+			this.loadInfo()
 		}
 	}
 </script>
@@ -65,6 +106,12 @@
 					height:100%;
 					width:100%;
 					display: inline-block;
+				}
+				img{
+					height:100%;
+					width:100%;
+					display: inline-block;
+					border-radius: 50%;
 				}
 			}
 			.detail-info{

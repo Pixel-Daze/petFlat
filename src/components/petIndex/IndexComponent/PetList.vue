@@ -13,7 +13,10 @@
 				<div class="description">
 					<span v-for="feature in item.PetFeature">{{feature}}</span>
 				</div>
-				<div class="area"></div>
+				<div class="old">
+					<span>{{item.PetOld}}</span>&nbsp;个月
+				</div>
+				<div class="area">{{item.area}}</div>
 			</div>
 		</div>
 	</div>
@@ -51,7 +54,7 @@
 	    }
 	    .pet-info{
 	    	flex: 1;
-	    	.fullname,.description{
+	    	.fullname,.description,.old,.area{
 	           height: 0.583333rem;
 	           line-height: 0.583333rem;
 	           width: 5.973333rem;
@@ -98,8 +101,20 @@
 	        		}
 	        	}
 	        }
+	        .old{
+	        	color: rgb(69,68,68);
+          		margin-top: 0.133333rem;
+          		span{
+          			color: #ff7e00;
+          			font-style: italic;
+          			font-weight: bold;
+          			font-size: 0.426667rem;
+          		}
+	        }
 	        .area{
-	        	
+          		color: rgb(69,68,68);
+          		margin-top: 0.133333rem;
+          		font-size: 0.4rem;
 	        }
 	    }
 

@@ -8,6 +8,8 @@ const PetIndex = resolve => require(['../components/petIndex/PetIndex'],resolve)
 const PetOrder = resolve => require(['../components/petOrder/PetOrder'],resolve)
 
 const PetMine = resolve => require(['../components/petMine/PetMine'],resolve)
+const EditUser = resolve => require(['../components/petMine/EditUser'],resolve)
+
 
 const SignIn = resolve => require(['../components/sign/SignIn'],resolve)
 const SignUp = resolve => require(['../components/sign/SignUp'],resolve)
@@ -49,6 +51,7 @@ const router = new Router({
       {name:'SignIn',path:'/signIn',component:SignIn},
       {name:'SignUp',path:'/signUp',component:SignUp},
       {name:'Protocol',path:'/protocol',component:Protocol},
+      {name:'EditUser',path:'/editUser',component:EditUser},
     	{path: '*', redirect: '/index/petIndex'}
   	]
 })

@@ -13,12 +13,13 @@
 </template>
 <script>
 	import { XHeader, XInput, Group, XButton } from 'vux'
+	import * as api from '../../api/baseApi'
 	export default{
 		data(){
 			return{
 				signInForm:{
-					phone:'',
-					password:''
+					phone:'15705213522',
+					password:'123'
 				}
 			}
 		},
@@ -35,7 +36,14 @@
 			signin(){
 				let vm = this
 				if(vm.checkInfo()){
-					console.log(vm.signInForm)
+					api.signin(vm.signInForm).then(resp=>{
+						if(resp.data.result == '0'){
+							let info = JSON.stringify(resp.data.data)
+							sessionStorage.setItem('user',info)
+							vm.$router.push({name:'PetMine'})
+						}
+						
+					})
 				}
 			},
 			checkInfo(){

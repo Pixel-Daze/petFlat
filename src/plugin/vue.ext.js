@@ -28,6 +28,14 @@ export default{
         Vue.prototype.back=()=>{
             history.back()
         }
+        //检查是否登陆
+        Vue.prototype.isSignIn=()=>{
+            if(sessionStorage.getItem('user')!=null){
+                return true
+            }else{
+                return false
+            }
+        }
 
 	}
 }
