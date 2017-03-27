@@ -1,6 +1,6 @@
 <template>
 	<div class="petIndex">
-		<index-header></index-header>
+		<index-header :user="user" :auth="auth"></index-header>
 		<div class="pet_container">
 			<search class="pet_search" @result-click="resultClick" @on-change="getResult" :results="results" v-model="value" position="absolute" auto-scroll-to-top top="0px" @on-focus="onFocus" @on-cancel="onCancel" :class="searchkey"></search>
 			<pet-list :petList="PetList" @choosePet="choosePet"></pet-list>
@@ -21,7 +21,9 @@
 				searchkey:{
 					'pet_search_focus':false
 				},
-				PetList:[]
+				PetList:[],
+				user:{},
+				auth:false
 			}
 		},
 		methods: {
@@ -41,6 +43,7 @@
 		    	console.log(item)
 		    },
 		    loadInfo(){
+		    	this.getUser()
 		    	this.getIndexList()
 		    },
 		    getIndexList(){
@@ -53,7 +56,16 @@
 		    	}else{
 		    		vm.PetList = petList
 		    	}
-		    }
+		    },
+		    getUser(){
+				let vm = this
+				if(vm.isSignIn()){
+					vm.user = JSON.parse(sessionStorage.getItem('user'))
+					vm.auth = true
+				}else{
+					vm.auth = false
+				}
+			}
 		},
 		components:{
 			Search,

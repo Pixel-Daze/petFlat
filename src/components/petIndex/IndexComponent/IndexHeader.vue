@@ -1,17 +1,42 @@
 <template>
 	<header class="pet_index_header vux-1px-b">
-		<div class="user-icon">
+		<div v-show="!auth" class="user-icon" @click="signIn">
 			<span>游客</span>
 		</div>
+		<div v-show="auth" class="user-icon">
+			<img :src="user.userIcon" alt="">
+		</div>
 		<div class="title">矮乐多宠物领养平台</div>
-		<div class="addPet">
+		<div class="addPet" @click="addPet">
 			<span class="icon iconfont icon-bianji"></span>
 		</div>
 	</header>
 </template>
 <script>
 	export default{
-
+		props:{
+			user:{
+				type:Object,
+				required:true
+			},
+			auth:{
+				type:Boolean,
+				required:true
+			}
+		},
+		methods:{
+			signIn(){
+				this.$router.push({name:'SignIn'})
+			},
+			addPet(){
+				let vm = this
+				if(vm.auth){
+					vm.$router.push({name:'AddPet'})
+				}else{
+					vm.signIn()
+				}
+			}
+		}
 	}
 </script>
 <style lang='scss'>
@@ -28,7 +53,7 @@
 		.user-icon{
 			width: 0.933333rem;
 			height: 0.933333rem;
-			span{
+			span,img{
 				width: 100%;
 				height: 100%;
 				display: inline-block;

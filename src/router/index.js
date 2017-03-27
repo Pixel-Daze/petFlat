@@ -4,6 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 const Index = resolve => require(['../components/Index'],resolve)
 const PetIndex = resolve => require(['../components/petIndex/PetIndex'],resolve)
+const AddPet = resolve => require(['../components/petIndex/AddPet'],resolve)
 
 const PetOrder = resolve => require(['../components/petOrder/PetOrder'],resolve)
 
@@ -52,6 +53,7 @@ const router = new Router({
       {name:'SignUp',path:'/signUp',component:SignUp},
       {name:'Protocol',path:'/protocol',component:Protocol},
       {name:'EditUser',path:'/editUser',component:EditUser},
+      {name:'AddPet',path:'/addPet',component:AddPet},
     	{path: '*', redirect: '/index/petIndex'}
   	]
 })
