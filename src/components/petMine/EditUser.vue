@@ -53,12 +53,9 @@
 			},
 			imageuploaded(res) {
 				let vm = this
-			  if (res.errcode == 0) {
-			    console.log(res)
+			  	if (res.errcode == 0) {
 			    	vm.user.userIcon = res.data.src
-
-
-			  }
+			  	}
 			},
 			errorhandle(err) {
 			  console.error(err);
@@ -93,8 +90,6 @@
 		    position: relative;
 		    overflow: hidden;
 		}
-
-		
 		.pure-button-primary, .pure-button-selected, a.pure-button-primary, a.pure-button-selected {
 		    background-color: #0078e7;
 		    color: #fff;
@@ -103,11 +98,7 @@
 		    font-family: inherit;
 		    font-size: 0.4rem;
 		    text-decoration: none;
-		}
-		.pure-button {
 		    display: inline-block;
-		}
-		.pure-button {
 		    background-color: #3ab981;
 		    color: white;
 		    padding: 0.133333rem 0.4rem;

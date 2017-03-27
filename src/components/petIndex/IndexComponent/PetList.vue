@@ -7,8 +7,8 @@
 			<div class="pet-info">
 				<div class="fullname">
 					<div class="name">{{item.PetName}}</div>
-					<span v-if="item.PetSex == '0'" class="sex icon iconfont icon-lanmeixingbienan"></span>
-					<span v-if="item.PetSex == '1'" class="sex icon iconfont icon-lanmeixingbienv"></span>
+					<span v-if="item.PetSex == '1'" class="sex icon iconfont icon-lanmeixingbienan"></span>
+					<span v-if="item.PetSex == '0'" class="sex icon iconfont icon-lanmeixingbienv"></span>
 				</div>
 				<div class="description">
 					<span v-for="feature in item.PetFeature">{{feature}}</span>
