@@ -38,7 +38,7 @@
 			Group,
 			XTextarea,
 			XButton,
-			'vue-core-image-upload': VueCoreImageUpload
+			VueCoreImageUpload
 		},
 		methods:{
 			loadInfo(){
