@@ -22,10 +22,8 @@
 				</vue-core-image-upload>
 	    	</group>
 	    	<group title="宠物生活照" class="imgList">
-	    		<div v-for="item in petInfo.ImgList">
-	    			<img class="avatar" v-bind:src="item"/>
-	    		</div>
-                <vue-core-image-upload v-bind:class="['pure-button','pure-button-primary','js-btn-crop']" text="上传宠物生活照" v-bind:crop="false" v-on:imageuploaded="upImgList"  url="http://101.198.151.190/api/upload.php" extensions="png,gif,jpeg,jpg" input-accept="image/*">
+	    		<img v-for="item in petInfo.ImgList" class="avatar-sq" v-bind:src="item"/>
+                <vue-core-image-upload v-if="petInfo.ImgList.length<3" v-bind:class="['pure-button','pure-button-primary','js-btn-crop']" text="上传宠物生活照" v-bind:crop="false" v-on:imageuploaded="upImgList"  url="http://101.198.151.190/api/upload.php" extensions="png,gif,jpeg,jpg" input-accept="image/*">
 				</vue-core-image-upload>
 	    	</group>
 		</div>
@@ -150,13 +148,19 @@
 			}
 			.thumb,.imgList{
 				.weui-cells{
-					height: 109px;
+					height: 129px;
 				}
 				.avatar{
 					width: 2.5rem;
 				    height: 2.5rem;
 				    margin-top: 0.266667rem;
 				    border-radius: 50%;
+				    border: 0.026667rem solid rgba(0,0,0,.05);
+				}
+				.avatar-sq{
+					width: 2.5rem;
+				    height: 2.5rem;
+				    margin-top: 0.266667rem;
 				    border: 0.026667rem solid rgba(0,0,0,.05);
 				}
 			}
@@ -182,8 +186,14 @@
 		    color: white;
 		    padding: 0.133333rem 0.4rem;
 		    border-radius: 0.133333rem;
-		    /*top: -1.066667rem;*/
+		    
 		    /*left: 2.666667rem;*/
+		}
+		.thumb .pure-button{
+			top: -1.066667rem;
+		}
+		.imgList .pure-button{
+			/*top: 0.933333rem;*/
 		}
 	}
 </style>

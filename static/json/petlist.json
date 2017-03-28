@@ -5,7 +5,7 @@
     {
         "PetCode":"2017022801",
         "ImgUrl":"http://www.95599.cn/jiangsu/intro/jsweixintest/ABCWeJS/dist/static/img/mall/product.png",
-        "imgList":["1","2","3"],
+        "ImgList":["1","2","3"],
         "PetName":"哈士奇",
         "PetType":"狗",
         "PetSex":"0",
