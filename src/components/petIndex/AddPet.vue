@@ -41,7 +41,7 @@
 			return {
 				petInfo:{
 					PetName:'',
-					PetType:'',
+					PetType:'狗',
 					PetSex:'0',
 					PetOld:'',
 					PetSter:'0',
@@ -73,7 +73,28 @@
 		},
 		methods:{
 			addPet(){
-
+				let vm = this
+				let user = JSON.parse(sessionStorage.getItem('user'))
+				if(vm.checkInfo()){
+					let body = {
+						PetName:vm.petInfo.PetName,
+						PetType:vm.petInfo.PetType,
+						PetSex:vm.petInfo.PetSex,
+						PetOld:vm.petInfo.PetOld,
+						PetSter:vm.petInfo.PetSter,
+						PetImmune:vm.petInfo.PetImmune,
+						PetFeature:vm.petInfo.PetFeature,
+						PetDescription:vm.petInfo.PetDescription,
+						ImgUrl:vm.petInfo.ImgUrl,
+						ImgList:vm.petInfo.ImgList,
+						area:user.area,
+						phone:user.phone
+					}
+					api.addPet(body).then(resp=>{
+						
+					})
+				}
+				
 			},
 			// 选择性别
 			changeSex(currentValue){
@@ -134,6 +155,55 @@
 			  	if (res.errcode == 0) {
 			    	vm.petInfo.ImgList.push(res.data.src)
 			  	}
+			},
+			//上传检测
+			checkInfo(){
+				let vm = this
+				if(vm.petInfo.PetName == ''){
+					vm.$vux.toast.show({
+					 	text: '请输入宠物名称',
+					 	width:'14em',
+					 	type: 'text'
+					})
+					return false
+				}else if(vm.petInfo.PetOld == ''){
+					vm.$vux.toast.show({
+					 	text: '请输入宠物年龄',
+					 	width:'14em',
+					 	type: 'text'
+					})
+					return false
+				}else if(vm.feature==''){
+					vm.$vux.toast.show({
+					 	text: '请输入宠物特点',
+					 	width:'14em',
+					 	type: 'text'
+					})
+					return false
+				}else if(vm.petInfo.PetDescription==''){
+					vm.$vux.toast.show({
+					 	text: '请输入宠物描述',
+					 	width:'14em',
+					 	type: 'text'
+					})
+					return false
+				}else if(vm.petInfo.ImgUrl == ''){
+					vm.$vux.toast.show({
+					 	text: '请上传宠物小图',
+					 	width:'14em',
+					 	type: 'text'
+					})
+					return false
+				}else if(vm.petInfo.ImgList.length == 0){
+					vm.$vux.toast.show({
+					 	text: '请上传宠物生活照',
+					 	width:'14em',
+					 	type: 'text'
+					})
+					return false
+				}else {
+					return true
+				}
 			}
 		}
 	}

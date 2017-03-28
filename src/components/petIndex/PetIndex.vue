@@ -3,7 +3,7 @@
 		<index-header :user="user" :auth="auth"></index-header>
 		<div class="pet_container">
 			<search class="pet_search" @result-click="resultClick" @on-change="getResult" :results="results" v-model="value" position="absolute" auto-scroll-to-top top="0px" @on-focus="onFocus" @on-cancel="onCancel" :class="searchkey"></search>
-			<pet-list :petList="PetList" @choosePet="choosePet"></pet-list>
+			<pet-list :petList="PetList" @choosePet="choosePet" @delelePet="delelePet"></pet-list>
 		</div>
 		
 	</div>
@@ -40,6 +40,9 @@
 		      this.searchkey['pet_search_focus'] = false
 		    },
 		    choosePet(item){
+		    	console.log(item)
+		    },
+		    delelePet(item){
 		    	console.log(item)
 		    },
 		    loadInfo(){

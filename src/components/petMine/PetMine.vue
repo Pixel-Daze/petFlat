@@ -31,10 +31,10 @@
 			</div>
 		</div>
 		<group class="mine_opt">
-		    <cell title="我的发布" is-link >
+		    <cell title="我的发布" is-link @click.native="goMinePublish">
 		    	<span slot="icon" class="icon iconfont icon-maobi"></span>
 		    </cell>
-		    <cell title="收藏" is-link>
+		    <cell title="收藏" is-link @click.native="goMineCollect">
 		    	<span slot="icon" class="icon iconfont icon-shoucang"></span>
 		    </cell>
 		    <cell title="编辑资料" is-link @click.native="goEdit">
@@ -64,6 +64,22 @@
 				let vm = this
 				if(vm.auth){
 					this.$router.push({name:'EditUser'})
+				}else{
+					vm.signIn()
+				}
+			},
+			goMinePublish(){
+				let vm = this
+				if(vm.auth){
+					this.$router.push({name:'MinePublish'})
+				}else{
+					vm.signIn()
+				}
+			},
+			goMineCollect(){
+				let vm = this
+				if(vm.auth){
+					this.$router.push({name:'MineCollect'})
 				}else{
 					vm.signIn()
 				}

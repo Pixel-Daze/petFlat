@@ -12,6 +12,8 @@ import store from './store'
 import  { ToastPlugin } from 'vux'
 Vue.use(ToastPlugin)
 
+import  { ConfirmPlugin } from 'vux'
+Vue.use(ConfirmPlugin)
 
 // httpInterceptor
 import {request, response} from './service/httpInterceptor';

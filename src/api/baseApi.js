@@ -40,3 +40,44 @@ export function signin(body) {
 		},reject)
 	})
 }
+
+// 新增宠物
+export function addPet(body){
+	return new Promise((resolve,reject)=>{
+		axios({
+			method:'post',
+			url:'../static/json/userInfo.json',
+			data:{
+				PetName:body.PetName,
+				PetType:body.PetType,
+				PetSex:body.PetSex,
+				PetOld:body.PetOld,
+				PetSter:body.PetSter,
+				PetImmune:body.PetImmune,
+				PetFeature:body.PetFeature,
+				PetDescription:body.PetDescription,
+				ImgUrl:body.ImgUrl,
+				ImgList:body.ImgList,
+				area:body.area,
+				phone:body.phone
+			}
+		}).then((resp) =>{
+			resolve(resp)
+		},reject)
+	})
+}
+
+//删除宠物
+export function delelePet(body){
+	return new Promise((resolve,reject)=>{
+		axios({
+			method:'post',
+			url:'../static/json/userInfo.json',
+			data:{
+				PetCode:body.PetCode
+			}
+		}).then((resp) =>{
+			resolve(resp)
+		},reject)
+	})
+}

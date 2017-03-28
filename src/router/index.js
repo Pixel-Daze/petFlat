@@ -10,6 +10,8 @@ const PetOrder = resolve => require(['../components/petOrder/PetOrder'],resolve)
 
 const PetMine = resolve => require(['../components/petMine/PetMine'],resolve)
 const EditUser = resolve => require(['../components/petMine/EditUser'],resolve)
+const MinePublish = resolve => require(['../components/petMine/MinePublish'],resolve)
+const MineCollect = resolve => require(['../components/petMine/MineCollect'],resolve)
 
 
 const SignIn = resolve => require(['../components/sign/SignIn'],resolve)
@@ -51,6 +53,8 @@ const router = new Router({
     	]},
       {name:'SignIn',path:'/signIn',component:SignIn},
       {name:'SignUp',path:'/signUp',component:SignUp},
+      {name:'MinePublish',path:'/minePublish',component:MinePublish},
+      {name:'MineCollect',path:'/mineCollect',component:MineCollect},
       {name:'Protocol',path:'/protocol',component:Protocol},
       {name:'EditUser',path:'/editUser',component:EditUser},
       {name:'AddPet',path:'/addPet',component:AddPet},

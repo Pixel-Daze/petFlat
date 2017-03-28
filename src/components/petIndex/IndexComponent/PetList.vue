@@ -9,6 +9,7 @@
 					<div class="name">{{item.PetName}}</div>
 					<span v-if="item.PetSex == '1'" class="sex icon iconfont icon-lanmeixingbienan"></span>
 					<span v-if="item.PetSex == '0'" class="sex icon iconfont icon-lanmeixingbienv"></span>
+					<span class="delete" v-if="item.phone == phone" @click.stop="delelePet(item)">删除</span>
 				</div>
 				<div class="description">
 					<span v-for="feature in item.PetFeature">{{feature}}</span>
@@ -23,6 +24,11 @@
 </template>
 <script>
 	export default{
+		data(){
+			return {
+				phone:''
+			}
+		},
 		props:{
 			petList:{
 				type:Array,
@@ -32,13 +38,25 @@
 		methods:{
 			choosePet(item){
 				this.$emit('choosePet',item)
+			},
+			delelePet(item){
+				this.$emit('delelePet',item)
+			},
+			loadInfo(){
+				let vm = this
+				if(vm.isSignIn()){
+					vm.phone = JSON.parse(sessionStorage.getItem('user')).phone
+				}
 			}
+		},
+		created(){
+			this.loadInfo()
 		}
 	}
 </script>
 <style lang='scss'>
 	.pet-item{
-		padding:0.186667rem 0.2rem;
+		padding:0.186667rem 0 0.186667rem 0.2rem;
 	    background-color: #fff;
 	    display: flex;
 	    margin-top: 0.266667rem;
@@ -81,6 +99,14 @@
 	          	}
 	          	.icon-lanmeixingbienv{
 	          		color: #f35993;
+	          	}
+	          	.delete{
+	          		position: absolute;
+					top:0.053333rem;
+					right: 0;
+					color: #d6d6d6;
+					padding:0 0.133333rem;
+					font-size: 0.266667rem;
 	          	}
 	        }
 	        .description{
