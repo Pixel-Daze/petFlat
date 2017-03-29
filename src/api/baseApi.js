@@ -53,6 +53,18 @@ export function signin(body) {
 	})
 }
 
+// 根据用户phone获取用户信息
+export function getuserInfo(body) {
+	return new Promise((resolve,reject)=>{
+		axios({
+			method:'get',
+			url:'../static/json/userInfo.json'
+		}).then((resp) =>{
+			resolve(resp)
+		},reject)
+	})
+}
+
 // 新增宠物
 export function addPet(body){
 	return new Promise((resolve,reject)=>{

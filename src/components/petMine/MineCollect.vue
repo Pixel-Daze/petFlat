@@ -32,7 +32,7 @@
 				})
 			},
 			choosePet(item){
-		    	console.log(item)
+		    	this.$router.push({name:'PetDetail',params:{petCode:item.PetCode}})
 		    }
 		},
 		created(){
