@@ -13,6 +13,7 @@
 	import {mapGetters} from 'vuex'
 	import IndexHeader from './IndexComponent/IndexHeader'
 	import PetList from './IndexComponent/PetList'
+	import * as api from '../../api/baseApi'
 	export default {
 		data(){
 			return {
@@ -41,9 +42,24 @@
 		    },
 		    choosePet(item){
 		    	console.log(item)
+		    	this.$router.push({name:'PetDetail',params:{petCode:item.PetCode}})
 		    },
 		    delelePet(item){
-		    	console.log(item)
+		    	this.$vux.confirm.show({
+        		  	content: '确定删除此条宠物信息吗',
+				  	onCancel () {
+				  	},
+				  	onConfirm () {
+				  		let body={
+				  			PetCode:item.PetCode
+				  		}
+				  		api.delelePet(body).then(resp=>{
+				  			if(resp.data.result == 0){
+
+				  			}
+				  		})
+				  	}
+				})
 		    },
 		    loadInfo(){
 		    	this.getUser()

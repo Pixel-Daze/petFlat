@@ -15,6 +15,10 @@ Vue.use(ToastPlugin)
 import  { ConfirmPlugin } from 'vux'
 Vue.use(ConfirmPlugin)
 
+// 轮播图组件
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+Vue.use(VueAwesomeSwiper)
+
 // httpInterceptor
 import {request, response} from './service/httpInterceptor';
 

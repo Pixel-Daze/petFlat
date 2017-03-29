@@ -5,6 +5,7 @@ Vue.use(Router)
 const Index = resolve => require(['../components/Index'],resolve)
 const PetIndex = resolve => require(['../components/petIndex/PetIndex'],resolve)
 const AddPet = resolve => require(['../components/petIndex/AddPet'],resolve)
+const PetDetail = resolve => require(['../components/petIndex/PetDetail'],resolve)
 
 const PetOrder = resolve => require(['../components/petOrder/PetOrder'],resolve)
 
@@ -58,6 +59,7 @@ const router = new Router({
       {name:'Protocol',path:'/protocol',component:Protocol},
       {name:'EditUser',path:'/editUser',component:EditUser},
       {name:'AddPet',path:'/addPet',component:AddPet},
+      {name:'PetDetail',path:'/petDetail/:petCode',component:PetDetail},
     	{path: '*', redirect: '/index/petIndex'}
   	]
 })

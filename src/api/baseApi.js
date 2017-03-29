@@ -29,6 +29,18 @@ export function getPetList(){
 	})
 }
 
+// 根据petCode获取宠物详情
+export function getPetDetail(body){
+	return new Promise((resolve,reject)=>{
+		axios({
+			method:'get',
+			url:'../static/json/petDetail.json'
+		}).then((resp) =>{
+			resolve(resp)
+		},reject)
+	})
+}
+
 // 用户登录
 export function signin(body) {
 	return new Promise((resolve,reject)=>{
