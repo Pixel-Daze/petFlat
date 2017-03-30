@@ -15,7 +15,7 @@
 				<span class="icon iconfont icon-back"></span>
 			</div>
 		</div>
-		<div class="user-info" v-show="auth">
+		<div class="user-info" v-show="auth" @click="userInfo(user.phone)">
 			<div class="user-icon">
 				<img :src="user.userIcon" alt="">
 			</div>
@@ -83,6 +83,9 @@
 				}else{
 					vm.signIn()
 				}
+			},
+			userInfo(phone){
+				this.$router.push({name:'MineInfo',params:{phone:phone}})
 			},
 			loadInfo(){
 				let vm = this
