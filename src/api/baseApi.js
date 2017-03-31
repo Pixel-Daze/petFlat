@@ -105,3 +105,33 @@ export function delelePet(body){
 		},reject)
 	})
 }
+
+// 收藏/移除收藏
+export function starPet(body){
+	return new Promise((resolve,reject)=>{
+		axios({
+			method:'post',
+			url:'../static/json/userInfo.json',
+			data:{
+				"phone":body.phone,
+    			"PetCode":body.PetCode,
+    			"star":body.star
+			}
+		}).then((resp) =>{
+			resolve(resp)
+		},reject)
+	})
+}
+
+//查询某个用户是否收藏过某个宠物
+export function findStar(body){
+	return new Promise((resolve,reject)=>{
+		axios({
+			method:'get',
+			url:'../static/json/userInfo.json'
+		}).then((resp) =>{
+			resolve(resp)
+		},reject)
+	})
+}
+

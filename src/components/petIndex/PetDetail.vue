@@ -2,6 +2,7 @@
 	<div class="petDetail">
 		<x-header class="vux-1px-b fix-header" :left-options="{backText: ''}" @on-click-back="back">宠物详情</x-header>
 		<div class="pet_container">
+			<span class="star icon iconfont" :class="{starLight:star,'icon-star1':star,'icon-star':!star}" @click.stop="starPet"></span>
 			<pet-swiper :swipe="swipe" :activityOption="activityOption"></pet-swiper>
 			<div class="pet-info vux-1px-b">
 				<div class="fullname">
@@ -27,7 +28,7 @@
 					<label>描述：</label>
 				{{petInfo.PetDescription}}</div>
 			</div>
-			<div class="publisher vux-1px-tb">
+			<div class="publisher vux-1px-tb" @click="findPublisher(publisher.phone)">
 				<div class="user-icon">
 					<img :src="publisher.userIcon" alt="">
 				</div>
@@ -68,7 +69,8 @@
 	              	loop: true
 	            },
 	            petInfo:{},
-	            publisher:{}
+	            publisher:{},
+	            star:false
 			}
 		},
 		components:{
@@ -91,6 +93,8 @@
 						vm.getuserInfo(body)
 					}
 				})
+				// 查询是否收藏
+				vm.findStar()
 			},
 			getuserInfo(body){
 				let vm = this
@@ -99,6 +103,48 @@
 						vm.publisher = resp.data.data
 					}
 				})
+			},
+			findPublisher(phone){
+				this.$router.push({name:'MineInfo',params:{phone:phone}})
+			},
+			findStar(){
+				let vm = this,body={
+					phone:JSON.parse(sessionStorage.getItem('user')).phone,
+					PetCode:vm.$route.params.petCode
+				}
+				api.findStar(body).then(resp=>{
+					if(resp.data.result == 0){
+						vm.star = true
+					}
+				})
+			},
+			starPet(){
+				let vm = this,body={
+					phone:JSON.parse(sessionStorage.getItem('user')).phone,
+					PetCode:vm.$route.params.petCode,
+					star:!vm.star
+				}
+				// todo记得修改api
+				api.findStar(body).then(resp=>{
+					if(resp.data.result == 0){
+						vm.star = !vm.star
+						if(vm.star){
+							vm.$vux.toast.show({
+							 	text: '收藏成功',
+							 	width:'7em',
+							 	type: 'text'
+							})
+						}else{
+							vm.$vux.toast.show({
+							 	text: '取消收藏',
+							 	width:'7em',
+							 	type: 'text'
+							})
+						}
+						
+					}
+				})
+
 			}
 		},
 		created(){
@@ -111,6 +157,30 @@
 	.petDetail{
 		.pet_container{
 			padding-top: 1.173333rem;
+			position: relative;
+			.star{
+				width: 0.933333rem;
+				height: 0.933333rem;
+				text-align: center;
+				line-height: 0.866667rem;
+				background: rgba(0,0,0,.2);
+				display: block;
+				border-radius: 50%;
+				font-size: 0.533333rem;
+				color: #fff;
+				position: absolute;
+				top: 1.306667rem;
+				right: 0.133333rem;
+				border:1px solid #fff;
+				z-index: 10;
+				font-weight: bold;
+			}
+			.starLight{
+				color: #ffb80d;
+			}
+			.icon-star1{
+				line-height: 0.973333rem;
+			}
 			.pet-info{
 		    	padding: 0.266667rem;
 		    	background: #fff;
