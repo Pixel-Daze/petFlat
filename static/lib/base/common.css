@@ -24,3 +24,7 @@
     top: 0px;
     z-index: 100;
 }
+
+.weui-dialog__btn_primary{
+  color: #f9532d !important;
+}

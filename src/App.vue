@@ -26,6 +26,7 @@ a:hover{
 html,body,#app {
 	height:100%;
   	background-color: #fbf9fe;
+  	font-size: 0.32rem;
 }
 </style>
 

@@ -3,13 +3,18 @@
 		<index-header :user="user" :auth="auth"></index-header>
 		<div class="pet_container">
 			<search class="pet_search" @result-click="resultClick" @on-change="getResult" :results="results" v-model="value" position="absolute" auto-scroll-to-top top="0px" @on-focus="onFocus" @on-cancel="onCancel" :class="searchkey"></search>
-			<pet-list :petList="PetList" @choosePet="choosePet" @delelePet="delelePet"></pet-list>
+			<scroller lock-x scrollbar-y use-pullup @on-pullup-loading="loadData()" :pullup-config="pullup_config" ref="scroller">
+				<div>
+					<pet-list :petList="PetList" @choosePet="choosePet" @delelePet="delelePet"></pet-list>
+				</div>
+				
+			</scroller>
 		</div>
 		
 	</div>
 </template>
 <script>
-	import { Search } from 'vux'
+	import { Search,Scroller } from 'vux'
 	import {mapGetters} from 'vuex'
 	import IndexHeader from './IndexComponent/IndexHeader'
 	import PetList from './IndexComponent/PetList'
@@ -24,7 +29,17 @@
 				},
 				PetList:[],
 				user:{},
-				auth:false
+				auth:false,
+				pullup_config:{
+				  content: '宠物信息加载中',
+				  pullUpHeight: 60,
+				  height: 40,
+				  autoRefresh: false,
+				  downContent: 'Release To Refresh',
+				  upContent: 'Pull Up To Refresh',
+				  loadingContent: 'Loading...',
+				  clsPrefix: 'xs-plugin-pullup-'
+				}
 			}
 		},
 		methods: {
@@ -66,15 +81,12 @@
 		    	this.getIndexList()
 		    },
 		    getIndexList(){
-		    	let vm = this,petList = vm.$store.getters.activeIndexPetList
-		    	if(petList.length==0){
-		    		vm.$store.dispatch('FETCH_INDEX_PETLIST').then(()=>{
-		    			petList = vm.$store.getters.activeIndexPetList
-		    			vm.PetList = petList
-		    		})
-		    	}else{
-		    		vm.PetList = petList
-		    	}
+		    	let vm = this
+		    	api.getPetList().then(resp=>{
+		    		if(resp.data.result=='0'){
+		    			vm.PetList = resp.data.data
+		    		}
+		    	})
 		    },
 		    getUser(){
 				let vm = this
@@ -84,12 +96,25 @@
 				}else{
 					vm.auth = false
 				}
+			},
+			loadData(){
+				console.log('loading...')
+				api.getPetList().then(resp=>{
+		    		if(resp.data.result=='0'){
+		    			resp.data.data.forEach(item=>{
+		    				this.PetList.push(item)
+		    				this.$refs.scroller.reset()
+		    				this.$refs.scroller.donePullup()
+		    			})
+		    		}
+		    	})
 			}
 		},
 		components:{
 			Search,
 			IndexHeader,
-			PetList
+			PetList,
+			Scroller 
 		},
 		computed:{
 			...mapGetters([

@@ -16,6 +16,7 @@
 </template>
 <script>
 	import { XHeader,Group,XButton,XInput } from 'vux'
+	import * as api from '../../api/baseApi'
 	export default{
 		data(){
 			return {

@@ -47,7 +47,7 @@ const scrollBehavior = (to, from, savedPosition) => {
  }
 
 const router = new Router({
-	mode:'history',
+	// mode:'history',
 	scrollBehavior,
   	routes: [
     	{name:'Index',path:'/index',component:Index,children:[

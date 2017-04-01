@@ -112,10 +112,13 @@
 	        .description{
 	        	margin-top: 0.133333rem;
 	        	span{
-	        		padding:0.08rem 0.213333rem;
+	        		padding:0 0.133333rem;
+	        		text-align: center;
 	        		color: #fff;
-	        		border-radius: 0.08rem;
+	        		border-radius: 0.133333rem;
 	        		margin-right: 0.186667rem;
+	        		display: inline-block;
+	        		font-size: 0.32rem;
 	        		&:nth-of-type(1){
 	        			background-color: #f4817c;
 	        		}
@@ -124,6 +127,9 @@
 	        		}
 	        		&:nth-of-type(3){
 	        			background-color: #fdf298;
+	        		}
+	        		&:nth-of-type(4){
+	        			background-color: #8d44af;
 	        		}
 	        	}
 	        }
