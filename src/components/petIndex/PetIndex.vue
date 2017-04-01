@@ -2,11 +2,9 @@
 	<div class="petIndex">
 		<index-header :user="user" :auth="auth"></index-header>
 		<div class="pet_container">
-			<search class="pet_search" @result-click="resultClick" @on-change="getResult" :results="results" v-model="value" position="absolute" auto-scroll-to-top top="0px" @on-focus="onFocus" @on-cancel="onCancel" :class="searchkey"></search>
+			<search class="pet_search" @result-click="resultClick" :results="results" cancel-text="搜索" v-model="value" position="absolute" auto-scroll-to-top top="0px" @on-focus="onFocus" @on-cancel="getIndexList" :class="searchkey"></search>
 			<scroller lock-x scrollbar-y use-pullup @on-pullup-loading="loadData()" :pullup-config="pullup_config" ref="scroller">
-				<div>
-					<pet-list :petList="PetList" @choosePet="choosePet" @delelePet="delelePet"></pet-list>
-				</div>
+				<pet-list :petList="PetList" @choosePet="choosePet" @delelePet="delelePet"></pet-list>
 				
 			</scroller>
 		</div>
@@ -46,9 +44,7 @@
 		    resultClick (item) {
 		      window.alert('you click the result item: ' + JSON.stringify(item))
 		    },
-		    getResult (val) {
-		      this.results = val ? getResult(this.value) : []
-		    },
+		    
 		    onFocus () {
 		      this.searchkey['pet_search_focus'] = true
 		    },
@@ -85,6 +81,8 @@
 		    	api.getPetList().then(resp=>{
 		    		if(resp.data.result=='0'){
 		    			vm.PetList = resp.data.data
+		    			this.$refs.scroller.reset({top:0})
+		    			this.$refs.scroller.donePullup()
 		    		}
 		    	})
 		    },
@@ -97,6 +95,7 @@
 					vm.auth = false
 				}
 			},
+			// todo准备两种模式之间切换
 			loadData(){
 				console.log('loading...')
 				api.getPetList().then(resp=>{
@@ -124,16 +123,6 @@
 		created(){
 			this.loadInfo()
 		}
-	}
-	function getResult (val) {
-	  let rs = []
-	  for (let i = 0; i < 8; i++) {
-	    rs.push({
-	      title: `${val} result: ${i + 1} `,
-	      other: i
-	    })
-	  }
-	  return rs
 	}
 </script>
 <style lang='scss'>
