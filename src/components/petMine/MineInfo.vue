@@ -2,7 +2,8 @@
 	<div class="mineInfo">
 		<div class="header">
 			<div class="back">
-				<span class="icon iconfont icon-back1" @click="back"></span>
+				<span class="icon iconfont icon-back1" @click.stop="back"></span>
+				<span v-if="phone==user.phone" class="icon iconfont icon-shezhi" @click.stop="setting"></span>
 			</div>
 			<div class="userInfo">
 				<img v-if="user.userIcon" :src="user.userIcon" alt="">
@@ -104,6 +105,9 @@
 				  	}
 				})
 		    	console.log(item)
+		    },
+		    setting(){
+		    	this.$router.push({name:'Setting'})
 		    }
 		},
 		created(){
@@ -121,7 +125,8 @@
 			background: url('../../../static/img/mine/header.png');
 			.back{
 				height: 1.066667rem;
-				padding-top: 0.133333rem;
+				padding-top: 0.266667rem;
+				position: relative;
 				span{
 					height: 0.933333rem;
 					width: 0.933333rem;
@@ -133,6 +138,11 @@
 					background: rgba(0,0,0,.2);
 					border-radius: 50%;
 					margin:0 0 0 0.4rem;
+				}
+				.icon-shezhi{
+					position: absolute;
+					right: .4rem;
+					top:0.266667rem;
 				}
 			}
 			.userInfo{

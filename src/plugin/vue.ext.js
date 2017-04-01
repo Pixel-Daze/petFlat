@@ -4,7 +4,6 @@ export default{
 		// 存储错误信息格式:{"bindcard":{"bindError":"验证码错误"}}
         // 规则：如果没有则创建，有就更新
         Vue.prototype.setMsg=(url,name,msg)=>{
-        	console.log(url,name,msg)
             if(sessionStorage.getItem(url) !== null){
                 let Msg = JSON.parse(sessionStorage.getItem(url))
                 Msg[name] = msg

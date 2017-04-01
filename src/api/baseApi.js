@@ -135,3 +135,20 @@ export function findStar(body){
 	})
 }
 
+//修改密码接口
+export function modifyPwd(body){
+	return new Promise((resolve,reject)=>{
+		axios({
+			method:'post',
+			url:'../static/json/userInfo.json',
+			data:{
+				oldpwd:body.oldpwd,
+				newpwd:body.newpwd,
+				phone:body.phone
+			}
+		}).then((resp) =>{
+			resolve(resp)
+		},reject)
+	})
+}
+

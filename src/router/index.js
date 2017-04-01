@@ -14,6 +14,8 @@ const EditUser = resolve => require(['../components/petMine/EditUser'],resolve)
 const MinePublish = resolve => require(['../components/petMine/MinePublish'],resolve)
 const MineCollect = resolve => require(['../components/petMine/MineCollect'],resolve)
 const MineInfo = resolve => require(['../components/petMine/MineInfo'],resolve)
+const Setting = resolve => require(['../components/petMine/Setting'],resolve)
+const ModifyPwd = resolve => require(['../components/petMine/ModifyPwd'],resolve)
 
 
 const SignIn = resolve => require(['../components/sign/SignIn'],resolve)
@@ -62,6 +64,8 @@ const router = new Router({
       {name:'AddPet',path:'/addPet',component:AddPet},
       {name:'PetDetail',path:'/petDetail/:petCode',component:PetDetail},
       {name:'MineInfo',path:'/mineInfo/:phone',component:MineInfo},
+      {name:'Setting',path:'/setting',component:Setting},
+      {name:'ModifyPwd',path:'/modifyPwd',component:ModifyPwd},
     	{path: '*', redirect: '/index/petIndex'}
   	]
 })

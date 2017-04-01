@@ -2,6 +2,10 @@
 
 > pet animal mobile website
 
+## Note
+
+本项目暂时没有后端支持，纯前端项目
+
 ## Build Setup
 
 ``` bash
