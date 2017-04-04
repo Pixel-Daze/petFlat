@@ -8,11 +8,11 @@
                 <span slot='icon' class="icon iconfont icon-shouyeshouye"></span>
     			<span slot = 'label'>主页</span>
     		</tabbar-item>
-            <tabbar-item @click.native="tabChange('1')">
+            <!-- <tabbar-item @click.native="tabChange('1')">
                 <span slot='icon' class="icon iconfont icon-icon"></span>
                 <span slot = 'label'>领养单</span>
-            </tabbar-item>
-    		<tabbar-item @click.native="tabChange('2')">
+            </tabbar-item> -->
+    		<tabbar-item @click.native="tabChange('1')">
                 <span slot='icon' class="icon iconfont icon-wo"></span>
     			<span slot = 'label'>我的</span>
     		</tabbar-item>
@@ -40,7 +40,7 @@
                 }
             },
             tabChange(value){
-                let index = parseInt(value),path=['PetIndex','PetOrder','PetMine'],vm = this
+                let index = parseInt(value),path=['PetIndex','PetMine'],vm = this
                 //保存已选择index
                 vm.setMsg('Index','path',value)
                 //判断路由是否需要跳转

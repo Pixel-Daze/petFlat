@@ -45,11 +45,6 @@
 				</div>
 			</div>
 		</div>
-		<footer>
-	      	<div class="purchase" >
-	        我想领养
-	      	</div>
-	    </footer>
 		
 	</div>
 </template>
@@ -94,7 +89,9 @@
 					}
 				})
 				// 查询是否收藏
-				vm.findStar()
+				if(vm.isSignIn()){
+					vm.findStar()
+				}
 			},
 			getuserInfo(body){
 				let vm = this
@@ -105,7 +102,17 @@
 				})
 			},
 			findPublisher(phone){
-				this.$router.push({name:'MineInfo',params:{phone:phone}})
+				let vm = this
+				if(vm.isSignIn()){
+					vm.$router.push({name:'MineInfo',params:{phone:phone}})	
+				}else{
+					vm.$vux.toast.show({
+						text: '请登录',
+						width:'7em',
+						type: 'text'
+					})
+				}
+				
 			},
 			findStar(){
 				let vm = this,body={
@@ -119,31 +126,41 @@
 				})
 			},
 			starPet(){
-				let vm = this,body={
-					phone:JSON.parse(sessionStorage.getItem('user')).phone,
-					PetCode:vm.$route.params.petCode,
-					star:!vm.star
-				}
-				// todo记得修改api
-				api.findStar(body).then(resp=>{
-					if(resp.data.result == 0){
-						vm.star = !vm.star
-						if(vm.star){
-							vm.$vux.toast.show({
-							 	text: '收藏成功',
-							 	width:'7em',
-							 	type: 'text'
-							})
-						}else{
-							vm.$vux.toast.show({
-							 	text: '取消收藏',
-							 	width:'7em',
-							 	type: 'text'
-							})
-						}
-						
+				let vm = this
+				if(vm.isSignIn()){
+					let body={
+						phone:JSON.parse(sessionStorage.getItem('user')).phone,
+						PetCode:vm.$route.params.petCode,
+						star:!vm.star
 					}
-				})
+					// todo记得修改api
+					api.findStar(body).then(resp=>{
+						if(resp.data.result == 0){
+							vm.star = !vm.star
+							if(vm.star){
+								vm.$vux.toast.show({
+								 	text: '收藏成功',
+								 	width:'7em',
+								 	type: 'text'
+								})
+							}else{
+								vm.$vux.toast.show({
+								 	text: '取消收藏',
+								 	width:'7em',
+								 	type: 'text'
+								})
+							}
+							
+						}
+					})
+				}else{
+					vm.$vux.toast.show({
+						text: '请登录',
+						width:'7em',
+						type: 'text'
+					})
+				}
+				
 
 			}
 		},
