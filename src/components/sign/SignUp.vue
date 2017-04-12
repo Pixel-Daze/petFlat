@@ -16,6 +16,7 @@
 </template>
 <script>
 	import { XHeader, XInput, Group, XButton } from 'vux'
+	import * as api from '../../api/baseApi'
 	export default{
 		data(){
 			return{
@@ -35,7 +36,9 @@
 			signup(){
 				let vm = this
 				if(vm.checkInfo()){
-					console.log(vm.signUpForm)
+					api.signup(vm.signUpForm).then(resp=>{
+						console.log(resp)
+					})
 				}
 			},
 			// 查看协议

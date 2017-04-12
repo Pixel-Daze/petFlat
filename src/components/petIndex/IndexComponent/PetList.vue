@@ -9,7 +9,7 @@
 					<div class="name">{{item.PetName}}</div>
 					<span v-if="item.PetSex == '1'" class="sex icon iconfont icon-lanmeixingbienan"></span>
 					<span v-if="item.PetSex == '0'" class="sex icon iconfont icon-lanmeixingbienv"></span>
-					<span class="delete" v-if="item.phone == phone" @click.stop="delelePet(item)">删除</span>
+					<span class="delete" v-if="item.phone == phone||item.phone==10001" @click.stop="delelePet(item)">删除</span>
 				</div>
 				<div class="description">
 					<span v-for="feature in item.PetFeature">{{feature}}</span>

@@ -5,6 +5,22 @@ import {
 	API_ROOT
 } from '../config'
 
+// 用户注册
+export function signup(body){
+	return new Promise((resolve,reject)=>{
+		axios({
+			method:'post',
+			url:API_ROOT+'register',
+			data:{
+				phone:body.phone,
+				password:body.password
+			}
+		}).then((resp) =>{
+			resolve(resp)
+		},reject)
+	})
+}
+
 // 获取协议信息
 export function getProtocolInfo(){
 	return new Promise((resolve,reject) => {
@@ -45,8 +61,12 @@ export function getPetDetail(body){
 export function signin(body) {
 	return new Promise((resolve,reject)=>{
 		axios({
-			method:'get',
-			url:'../static/json/userInfo.json'
+			method:'post',
+			url:API_ROOT+'login',
+			data:{
+				phone:body.phone,
+				password:body.password
+			}
 		}).then((resp) =>{
 			resolve(resp)
 		},reject)
