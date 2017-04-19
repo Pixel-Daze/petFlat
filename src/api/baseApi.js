@@ -77,8 +77,11 @@ export function signin(body) {
 export function getuserInfo(body) {
 	return new Promise((resolve,reject)=>{
 		axios({
-			method:'get',
-			url:'../static/json/userInfo.json'
+			method:'post',
+			url:API_ROOT+'search_user',
+			data:{
+				phone:body.phone
+			}
 		}).then((resp) =>{
 			resolve(resp)
 		},reject)
@@ -160,7 +163,7 @@ export function modifyPwd(body){
 	return new Promise((resolve,reject)=>{
 		axios({
 			method:'post',
-			url:'../static/json/userInfo.json',
+			url:API_ROOT+'change_password',
 			data:{
 				oldpwd:body.oldpwd,
 				newpwd:body.newpwd,

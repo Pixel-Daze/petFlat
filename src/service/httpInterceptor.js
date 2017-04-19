@@ -1,5 +1,9 @@
 // httpInterceptor
 import axios from 'axios';
+import Vue from 'vue'
+import  { AlertPlugin } from 'vux'
+Vue.use(AlertPlugin)
+
 
 
 //不拦截的请求名
@@ -43,8 +47,11 @@ export const request = function(config){
 }
 
 export const response = function(response){
-    if(response.data.result!==0&&checkUrl(response)){
-        // MessageBox.alert(response.data.msg)
+    if(response.data.result!==0){
+        Vue.$vux.alert.show({
+          title: '提示',
+          content: response.data.msg
+        })
     }
 	// clearTimeout(loadingTimer);
  //    loadingTimer = setTimeout(()=>{

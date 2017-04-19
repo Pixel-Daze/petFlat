@@ -16,12 +16,18 @@ Vue.use(ToastPlugin)
 import  { ConfirmPlugin } from 'vux'
 Vue.use(ConfirmPlugin)
 
+import  { AlertPlugin } from 'vux'
+Vue.use(AlertPlugin)
+
 // 轮播图组件
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper)
 
 // httpInterceptor
 import {request, response} from './service/httpInterceptor';
+axios.interceptors.request.use(request);
+
+axios.interceptors.response.use(response);
 
 import Plugin from './plugin/vue.ext.js'
 Vue.use(Plugin)
