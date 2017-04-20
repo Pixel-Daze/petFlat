@@ -2,7 +2,7 @@
 	<div class="petIndex">
 		<index-header :user="user" :auth="auth"></index-header>
 		<div class="pet_container">
-			<search class="pet_search" @result-click="resultClick" :results="results" cancel-text="搜索" v-model="value" position="absolute" auto-scroll-to-top top="0px" @on-focus="onFocus" @on-cancel="getIndexList" :class="searchkey"></search>
+			<search class="pet_search" @result-click="resultClick" placeholder="搜索宠物" :results="results" cancel-text="搜索" v-model="value" position="absolute" auto-scroll-to-top top="0px" @on-focus="onFocus" @on-cancel="getIndexList" :class="searchkey"></search>
 			<scroller lock-x scrollbar-y use-pullup @on-pullup-loading="loadData()" :pullup-config="pullup_config" ref="scroller">
 				<pet-list :petList="PetList" @choosePet="choosePet" @delelePet="delelePet"></pet-list>
 				
@@ -21,7 +21,7 @@
 		data(){
 			return {
 				results: [],
-				value: '搜索宠物',
+				value: '',
 				searchkey:{
 					'pet_search_focus':false
 				},
@@ -81,7 +81,9 @@
 		    	api.getPetList().then(resp=>{
 		    		if(resp.data.result=='0'){
 		    			vm.PetList = resp.data.data
-		    			this.$refs.scroller.reset({top:0})
+		    			this.$nextTick(() => {
+					      this.$refs.scroller.reset({top: 0})
+					    })
 		    			this.$refs.scroller.donePullup()
 		    		}
 		    	})
@@ -119,6 +121,11 @@
 			...mapGetters([
 				'activeIndexPetList'
 			])
+		},
+		mounted(){
+			this.$nextTick(() => {
+		      this.$refs.scroller.reset({top: 0})
+		    })
 		},
 		created(){
 			this.loadInfo()
