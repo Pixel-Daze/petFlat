@@ -42,11 +42,13 @@
 					}
 					api.modifyPwd(body).then(resp=>{
 						if(resp.data.result == '0'){
-							this.$vux.toast.show({
-							 	text: '修改密码成功',
-							 	width:'10em',
-							 	type: 'text'
-							})
+							vm.$vux.alert.show({
+						        title: '提示',
+						        content: '修改密码成功',
+						        onHide () {
+						           vm.$router.push({name:'PetMine'})
+						        }
+						    })
 						}
 					})
 				}

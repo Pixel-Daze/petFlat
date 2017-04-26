@@ -6,8 +6,7 @@
 				<span v-if="phone==user.phone" class="icon iconfont icon-shezhi" @click.stop="setting"></span>
 			</div>
 			<div class="userInfo">
-				<img v-if="user.userIcon" :src="user.userIcon" alt="">
-				<img v-else src="http://www.95599.cn/jiangsu/intro/jsweixintest/ABCWeJS/dist/static/img/mall/product.png" alt="">
+				<img :src="user.userIcon" alt="">
 				<div v-if="user.username" class="name">{{user.username}}</div>
 				<div v-else class="name">认证用户</div>
 				<span v-if="user.area">{{user.area}}</span>
