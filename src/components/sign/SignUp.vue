@@ -33,13 +33,33 @@
 		    XButton
 		},
 		methods:{
+			// 注册
 			signup(){
 				let vm = this
 				if(vm.checkInfo()){
 					api.signup(vm.signUpForm).then(resp=>{
-						console.log(resp)
+						if(resp.data.result == 0){
+							vm.$vux.alert.show({
+						        title: '提示',
+						        content: '注册成功',
+						        onHide () {
+						           vm.signin(vm.signUpForm)
+						        }
+						    })
+						}
 					})
 				}
+			},
+			//登录函数
+			signin(body){
+				let vm = this
+				api.signin(body).then(resp=>{
+					if(resp.data.result == '0'){
+						let info = JSON.stringify(resp.data.data)
+						sessionStorage.setItem('user',info)
+						vm.$router.push({name:'PetMine'})
+					}
+				})
 			},
 			// 查看协议
 			protocol(){
@@ -54,7 +74,7 @@
 					 	type: 'text'
 					})
 					return false
-				}else if(vm.signUpForm.password == 0){
+				}else if(vm.signUpForm.password.length == 0){
 					this.$vux.toast.show({
 					 	text: '请输入密码',
 					 	width:'8em',

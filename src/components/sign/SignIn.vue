@@ -18,8 +18,8 @@
 		data(){
 			return{
 				signInForm:{
-					phone:'15705213522',
-					password:'123'
+					phone:'',
+					password:''
 				}
 			}
 		},
@@ -55,7 +55,7 @@
 					 	type: 'text'
 					})
 					return false
-				}else if(vm.signInForm.password == 0){
+				}else if(vm.signInForm.password.length == 0){
 					this.$vux.toast.show({
 					 	text: '请输入密码',
 					 	width:'8em',

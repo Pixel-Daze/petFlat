@@ -21,6 +21,25 @@ export function signup(body){
 	})
 }
 
+// 编辑用户信息
+export function editUser(body){
+	return new Promise((resolve,reject)=>{
+		axios({
+			method:'post',
+			url:API_ROOT+'edit_user',
+			data:{
+				phone:body.phone,
+				username:body.username,
+				userIcon:body.userIcon,
+				area:body.area,
+				description:body.description
+			}
+		}).then((resp) =>{
+			resolve(resp)
+		},reject)
+	})
+}
+
 // 获取协议信息
 export function getProtocolInfo(){
 	return new Promise((resolve,reject) => {

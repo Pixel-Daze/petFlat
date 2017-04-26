@@ -4,13 +4,12 @@
 		<div class="content">
 			<div class="user">
                 <img class="avatar" v-bind:src="user.userIcon"/><br>
-                <vue-core-image-upload v-bind:class="['pure-button','pure-button-primary','js-btn-crop']" text="上传头像" v-bind:crop="false" v-on:imageuploaded="imageuploaded"  url="http://101.198.151.190/api/upload.php" extensions="png,gif,jpeg,jpg" v-on:errorhandle="errorhandle" input-accept="image/*">
+                <vue-core-image-upload v-bind:class="['pure-button','pure-button-primary','js-btn-crop']" text="上传头像" v-bind:crop="false" v-on:imageuploaded="imageuploaded"  url="http://43.251.116.231:5000/upload_pic" extensions="png,gif,jpeg,jpg" v-on:errorhandle="errorhandle" input-accept="image/*">
 				</vue-core-image-upload>
             </div>
 			
 			<group>
 				<x-input title="昵称：" placeholder="请输入昵称" v-model="user.username"></x-input>
-	      		<x-input title="手机：" name="mobile" placeholder="请输入手机号码" keyboard="number" v-model="user.phone" is-type="china-mobile"></x-input>
 	      		<x-input title="城市：" placeholder="请输入所在城市" v-model="user.area"></x-input>
 	    	</group>
 	    	<group title="个人简介">
@@ -49,16 +48,57 @@
 			},
 			updateUser(){
 				let vm = this
-				vm.$router.push({name:'PetMine'})
+				// vm.$router.push({name:'PetMine'})
+				if(vm.checkInfo()){
+					api.editUser(vm.user).then(resp=>{
+						if(resp.data.result == 0){
+							vm.$vux.alert.show({
+						        title: '提示',
+						        content: '修改个人信息成功',
+						        onHide () {
+						           sessionStorage.setItem('user',JSON.stringify(vm.user))
+						           vm.$router.push({name:'PetMine'})
+						        }
+						    })
+						}
+					})
+				}
 			},
 			imageuploaded(res) {
 				let vm = this
-			  	if (res.errcode == 0) {
+			  	// if (res.errcode == 0) {
 			    	vm.user.userIcon = res.data.src
-			  	}
+			  	// }
 			},
 			errorhandle(err) {
 			  console.error(err);
+			},
+			checkInfo(){
+				let vm = this
+				if(vm.user.username == ''){
+					this.$vux.toast.show({
+					 	text: '请输入昵称',
+					 	width:'8em',
+					 	type: 'text'
+					})
+					return false
+				}else if(vm.user.area == ''){
+					this.$vux.toast.show({
+					 	text: '请输入所在城市',
+					 	width:'14em',
+					 	type: 'text'
+					})
+					return false
+				}else if(vm.user.description == ''){
+					this.$vux.toast.show({
+					 	text: '请输入简介',
+					 	width:'8em',
+					 	type: 'text'
+					})
+					return false
+				}else{
+					return true
+				}
 			}
 		},
 		mounted(){
