@@ -4,7 +4,7 @@
 		<div class="content">
 			<div class="user">
                 <img class="avatar" v-bind:src="user.userIcon"/><br>
-                <vue-core-image-upload v-bind:class="['pure-button','pure-button-primary','js-btn-crop']" text="上传头像" v-bind:crop="false" v-on:imageuploaded="imageuploaded"  url="http://43.251.116.231:5000/upload_pic" extensions="png,gif,jpeg,jpg" v-on:errorhandle="errorhandle" input-accept="image/*">
+                <vue-core-image-upload v-bind:class="['pure-button','pure-button-primary','js-btn-crop']" text="上传头像" v-bind:crop="false" inputOfFile="file" v-on:imageuploaded="imageuploaded"  url="http://43.251.116.231:5000/upload_pic" extensions="png,gif,jpeg,jpg" v-on:errorhandle="errorhandle" input-accept="image/*">
 				</vue-core-image-upload>
             </div>
 			
@@ -48,7 +48,6 @@
 			},
 			updateUser(){
 				let vm = this
-				// vm.$router.push({name:'PetMine'})
 				if(vm.checkInfo()){
 					api.editUser(vm.user).then(resp=>{
 						if(resp.data.result == 0){
@@ -66,9 +65,9 @@
 			},
 			imageuploaded(res) {
 				let vm = this
-			  	// if (res.errcode == 0) {
-			    	vm.user.userIcon = res.data.src
-			  	// }
+			  	if (res.result == 0) {
+			    	vm.user.userIcon = res.data
+			  	}
 			},
 			errorhandle(err) {
 			  console.error(err);

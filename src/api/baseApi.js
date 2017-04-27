@@ -112,7 +112,7 @@ export function addPet(body){
 	return new Promise((resolve,reject)=>{
 		axios({
 			method:'post',
-			url:'../static/json/userInfo.json',
+			url:API_ROOT+'add_pet',
 			data:{
 				PetName:body.PetName,
 				PetType:body.PetType,

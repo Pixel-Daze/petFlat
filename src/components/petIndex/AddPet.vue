@@ -13,17 +13,17 @@
       			<x-switch title="宠物绝育" :inline-desc="immuneName" v-model="immune" @on-change="changeImmune"></x-switch>
 	    	</group>
 	    	<group title="宠物简介">
-	    		<x-textarea placeholder="用短语描述宠物特点用';'隔开,如：可爱；有点蠢" v-model="feature" @on-change="splitFeature"></x-textarea>
+	    		<x-textarea placeholder="用短语描述宠物特点用'；'隔开,如：可爱；有点蠢" v-model="feature" @on-change="splitFeature"></x-textarea>
 	    		<x-textarea placeholder="描述宠物" v-model="petInfo.PetDescription"></x-textarea>
 	    	</group>
 	    	<group title="宠物小图" class="thumb">
 	    		<img class="avatar" v-bind:src="petInfo.ImgUrl"/>
-                <vue-core-image-upload v-bind:class="['pure-button','pure-button-primary','js-btn-crop']" text="上传宠物小图" v-bind:crop="false" v-on:imageuploaded="upthumb"  url="http://101.198.151.190/api/upload.php" extensions="png,gif,jpeg,jpg" input-accept="image/*">
+                <vue-core-image-upload v-bind:class="['pure-button','pure-button-primary','js-btn-crop']" text="上传宠物小图" v-bind:crop="false" v-on:imageuploaded="upthumb" inputOfFile="file"  url="http://43.251.116.231:5000/upload_pic" extensions="png,gif,jpeg,jpg" input-accept="image/*">
 				</vue-core-image-upload>
 	    	</group>
 	    	<group title="宠物生活照" class="imgList">
 	    		<img v-for="item in petInfo.ImgList" class="avatar-sq" v-bind:src="item"/>
-                <vue-core-image-upload v-if="petInfo.ImgList.length<3" v-bind:class="['pure-button','pure-button-primary','js-btn-crop']" text="上传宠物生活照" v-bind:crop="false" v-on:imageuploaded="upImgList"  url="http://101.198.151.190/api/upload.php" extensions="png,gif,jpeg,jpg" input-accept="image/*">
+                <vue-core-image-upload v-if="petInfo.ImgList.length<3" v-bind:class="['pure-button','pure-button-primary','js-btn-crop']" text="上传宠物生活照" v-bind:crop="false" v-on:imageuploaded="upImgList" inputOfFile="file"  url="http://43.251.116.231:5000/upload_pic" extensions="png,gif,jpeg,jpg" input-accept="image/*">
 				</vue-core-image-upload>
 	    	</group>
 		</div>
@@ -91,7 +91,15 @@
 						phone:user.phone
 					}
 					api.addPet(body).then(resp=>{
-						
+						if(resp.data.result == 0){
+							vm.$vux.alert.show({
+						        title: '提示',
+						        content: '发布成功',
+						        onHide () {
+						           vm.$router.push({name:'PetIndex'})
+						        }
+						    })
+						}
 					})
 				}
 				
@@ -145,15 +153,15 @@
 			//上传宠物小图
 			upthumb(res) {
 				let vm = this
-			  	if (res.errcode == 0) {
-			    	vm.petInfo.ImgUrl = res.data.src
+			  	if (res.result == 0) {
+			    	vm.petInfo.ImgUrl = res.data
 			  	}
 			},
 			//上传宠物列表
 			upImgList(res){
 				let vm = this
-			  	if (res.errcode == 0) {
-			    	vm.petInfo.ImgList.push(res.data.src)
+			  	if (res.result == 0) {
+			    	vm.petInfo.ImgList.push(res.data)
 			  	}
 			},
 			//上传检测
