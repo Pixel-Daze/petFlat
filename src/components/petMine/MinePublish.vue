@@ -1,33 +1,56 @@
 <template>
 	<div class="minePublish">
 		<x-header class="vux-1px-b fix-header" :left-options="{backText: ''}" @on-click-back="back">我的发布</x-header>
-		<div class="pet_container">
+		<scroller class="pet_container" lock-x scrollbar-y use-pullup @on-pullup-loading="loadData()" :pullup-config="pullup_config" ref="scroller">
+				<pet-list :petList="PetList" @choosePet="choosePet" @delelePet="delelePet"></pet-list>
+		</scroller>
+		<!-- <div class="pet_container">
 			<pet-list :petList="PetList" @choosePet="choosePet" @delelePet="delelePet"></pet-list>
-		</div>
+		</div> -->
 	</div>
 </template>
 <script>
-	import { XHeader} from 'vux'
+	import { XHeader,Scroller} from 'vux'
 	import PetList from '../petIndex/IndexComponent/PetList'
 	import * as api from '../../api/baseApi'
 	export default{
 		data(){
 			return {
-				PetList:[]
+				PetList:[],
+				pullup_config:{
+				  content: '宠物信息加载中',
+				  pullUpHeight: 60,
+				  height: 40,
+				  autoRefresh: false,
+				  downContent: 'Release To Refresh',
+				  upContent: '',
+				  loadingContent: 'Loading...',
+				  clsPrefix: 'xs-plugin-pullup-'
+				},
+				page:1,
+				num:8
 			}
 		},
 		components:{
 			XHeader,
-			PetList
+			PetList,
+			Scroller
 		},
 		methods:{
 			loadInfo(){
 				let vm = this
-				api.getPetList().then(resp=>{
+				let body = {
+					phone:JSON.parse(sessionStorage.getItem('user')).phone,
+					page:vm.page,
+					num:vm.num
+				}
+				api.getPetListByPhone(body).then(resp=>{
 					if(resp.data.result == 0){
-						vm.PetList = resp.data.data.filter(item=>{
-							return item.phone == JSON.parse(sessionStorage.getItem('user')).phone
-						})
+						vm.PetList = resp.data.data
+						this.$nextTick(() => {
+					      this.$refs.scroller.reset({top: 0})
+					    })
+		    			this.$refs.scroller.donePullup()
 					}
 				})
 			},
@@ -35,7 +58,8 @@
 		    	this.$router.push({name:'PetDetail',params:{petCode:item.PetCode}})
 		    },
 		    delelePet(item){
-		    	this.$vux.confirm.show({
+		    	let vm = this
+		    	vm.$vux.confirm.show({
         		  	content: '确定删除此条宠物信息吗',
 				  	onCancel () {
 				  	},
@@ -45,13 +69,31 @@
 				  		}
 				  		api.delelePet(body).then(resp=>{
 				  			if(resp.data.result == 0){
-
+				  				vm.$vux.toast.show({
+									text: '删除成功',
+									width:'9em',
+									type: 'text'
+								})
+								vm.page = 1
+								vm.getIndexList()
 				  			}
 				  		})
 				  	}
 				})
-		    	console.log(item)
-		    }
+		    },
+		    loadData(){
+				let vm = this
+				
+				api.getPetList().then(resp=>{
+		    		if(resp.data.result=='0'){
+		    			resp.data.data.forEach(item=>{
+		    				vm.PetList.push(item)
+		    				vm.$refs.scroller.reset()
+		    				vm.$refs.scroller.donePullup()
+		    			})
+		    		}
+		    	})
+			}
 		},
 		created(){
 			this.loadInfo()

@@ -53,23 +53,63 @@ export function getProtocolInfo(){
 }
 
 // 获取宠物信息列表
-export function getPetList(){
+export function getPetList(body){
 	return new Promise((resolve,reject)=>{
 		axios({
-			method:'get',
-			url:'../static/json/petlist.json'
+			method:'post',
+			url:API_ROOT+'list-pets',
+			data:{
+				page:body.page,
+				num:body.num
+			}
 		}).then((resp) =>{
 			resolve(resp)
 		},reject)
 	})
 }
 
+// 查询某个用户发布的宠物列表
+export function getPetListByPhone(body){
+	return new Promise((resolve,reject)=>{
+		axios({
+			method:'post',
+			url:API_ROOT+'search_pet_by_phone',
+			data:{
+				phone:body.phone,
+				page:body.page,
+				num:body.num
+			}
+		}).then((resp) =>{
+			resolve(resp)
+		},reject)
+	})
+}
+
+// 查询某个用户收藏的宠物列表
+export function getStarList(body){
+	return new Promise((resolve,reject)=>{
+		axios({
+			method:'post',
+			url:API_ROOT+'search_star_pets',
+			data:{
+				phone:body.phone
+			}
+		}).then((resp) =>{
+			resolve(resp)
+		},reject)
+	})
+}
+
+
 // 根据petCode获取宠物详情
 export function getPetDetail(body){
 	return new Promise((resolve,reject)=>{
 		axios({
-			method:'get',
-			url:'../static/json/petDetail.json'
+			method:'post',
+			url:API_ROOT+'search-pet',
+			data:{
+				PetCode:body.PetCode
+			}
 		}).then((resp) =>{
 			resolve(resp)
 		},reject)
@@ -138,7 +178,7 @@ export function delelePet(body){
 	return new Promise((resolve,reject)=>{
 		axios({
 			method:'post',
-			url:'../static/json/userInfo.json',
+			url:API_ROOT+'delete-pet',
 			data:{
 				PetCode:body.PetCode
 			}
@@ -153,7 +193,7 @@ export function starPet(body){
 	return new Promise((resolve,reject)=>{
 		axios({
 			method:'post',
-			url:'../static/json/userInfo.json',
+			url:API_ROOT+'pet-star',
 			data:{
 				"phone":body.phone,
     			"PetCode":body.PetCode,
@@ -169,8 +209,12 @@ export function starPet(body){
 export function findStar(body){
 	return new Promise((resolve,reject)=>{
 		axios({
-			method:'get',
-			url:'../static/json/userInfo.json'
+			method:'post',
+			url:API_ROOT+'pet-is-star',
+			data:{
+				phone:body.phone,
+				PetCode:body.PetCode
+			}
 		}).then((resp) =>{
 			resolve(resp)
 		},reject)

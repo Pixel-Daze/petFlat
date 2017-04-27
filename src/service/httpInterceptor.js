@@ -7,7 +7,7 @@ Vue.use(AlertPlugin)
 
 
 //不拦截的请求名
-const unInterceptorUrl = ['checkAndBindCard']
+const unInterceptorUrl = ['pet-is-star']
 
 //不弹loading的请求名
 const unLoadingUrl = ['GetProductList','GetOrderList']
@@ -47,7 +47,7 @@ export const request = function(config){
 }
 
 export const response = function(response){
-    if(response.data.result!==0){
+    if(response.data.result!==0&&checkUrl(response)){
         Vue.$vux.alert.show({
           title: '提示',
           content: response.data.msg

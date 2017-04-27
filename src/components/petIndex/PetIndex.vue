@@ -34,10 +34,12 @@
 				  height: 40,
 				  autoRefresh: false,
 				  downContent: 'Release To Refresh',
-				  upContent: 'Pull Up To Refresh',
+				  upContent: '',
 				  loadingContent: 'Loading...',
 				  clsPrefix: 'xs-plugin-pullup-'
-				}
+				},
+				page:1,
+				num:8
 			}
 		},
 		methods: {
@@ -56,7 +58,8 @@
 		    	this.$router.push({name:'PetDetail',params:{petCode:item.PetCode}})
 		    },
 		    delelePet(item){
-		    	this.$vux.confirm.show({
+		    	let vm = this
+		    	vm.$vux.confirm.show({
         		  	content: '确定删除此条宠物信息吗',
 				  	onCancel () {
 				  	},
@@ -66,7 +69,13 @@
 				  		}
 				  		api.delelePet(body).then(resp=>{
 				  			if(resp.data.result == 0){
-
+				  				vm.$vux.toast.show({
+									text: '删除成功',
+									width:'9em',
+									type: 'text'
+								})
+								vm.page = 1
+								vm.getIndexList()
 				  			}
 				  		})
 				  	}
@@ -78,7 +87,11 @@
 		    },
 		    getIndexList(){
 		    	let vm = this
-		    	api.getPetList().then(resp=>{
+		    	let body = {
+		    		page:vm.page,
+		    		num:vm.num
+		    	}
+		    	api.getPetList(body).then(resp=>{
 		    		if(resp.data.result=='0'){
 		    			vm.PetList = resp.data.data
 		    			this.$nextTick(() => {
@@ -99,13 +112,14 @@
 			},
 			// todo准备两种模式之间切换
 			loadData(){
-				console.log('loading...')
+				let vm = this
+				
 				api.getPetList().then(resp=>{
 		    		if(resp.data.result=='0'){
 		    			resp.data.data.forEach(item=>{
-		    				this.PetList.push(item)
-		    				this.$refs.scroller.reset()
-		    				this.$refs.scroller.donePullup()
+		    				vm.PetList.push(item)
+		    				vm.$refs.scroller.reset()
+		    				vm.$refs.scroller.donePullup()
 		    			})
 		    		}
 		    	})

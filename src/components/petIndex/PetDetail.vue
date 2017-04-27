@@ -122,6 +122,8 @@
 				api.findStar(body).then(resp=>{
 					if(resp.data.result == 0){
 						vm.star = true
+					}else{
+						vm.star = false
 					}
 				})
 			},
@@ -133,8 +135,7 @@
 						PetCode:vm.$route.params.petCode,
 						star:!vm.star
 					}
-					// todo记得修改api
-					api.findStar(body).then(resp=>{
+					api.starPet(body).then(resp=>{
 						if(resp.data.result == 0){
 							vm.star = !vm.star
 							if(vm.star){
@@ -160,8 +161,6 @@
 						type: 'text'
 					})
 				}
-				
-
 			}
 		},
 		created(){

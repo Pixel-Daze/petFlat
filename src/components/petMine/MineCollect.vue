@@ -23,11 +23,12 @@
 		methods:{
 			loadInfo(){
 				let vm = this
-				api.getPetList().then(resp=>{
+				let body = {
+					phone:JSON.parse(sessionStorage.getItem('user')).phone,
+				}
+				api.getStarList(body).then(resp=>{
 					if(resp.data.result == 0){
-						vm.PetList = resp.data.data.filter(item=>{
-							return item.phone != JSON.parse(sessionStorage.getItem('user')).phone
-						})
+						vm.PetList = resp.data.data
 					}
 				})
 			},

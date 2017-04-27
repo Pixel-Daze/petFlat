@@ -76,11 +76,14 @@
 			},
 			getMinePet(){
 				let vm = this
-				api.getPetList().then(resp=>{
+				let body = {
+					phone:vm.$route.params.phone,
+					page:1,
+					num:8
+				}
+				api.getPetListByPhone(body).then(resp=>{
 					if(resp.data.result == 0){
-						vm.PetList = resp.data.data.filter(item=>{
-							return item.phone == JSON.parse(sessionStorage.getItem('user')).phone
-						})
+						vm.PetList = resp.data.data
 					}
 				})
 			},

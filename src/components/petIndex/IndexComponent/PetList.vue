@@ -2,7 +2,7 @@
 	<div>
 		<div class="pet-item" v-for="item in petList" @click="choosePet(item)">
 			<div class="pet-img">
-				<img :src="item.ImgUrl" alt="">
+				<x-img :src="item.ImgUrl" :offset="-100" ></x-img>
 			</div>
 			<div class="pet-info">
 				<div class="fullname">
@@ -23,11 +23,15 @@
 	</div>
 </template>
 <script>
+	import { XImg} from 'vux'
 	export default{
 		data(){
 			return {
 				phone:''
 			}
+		},
+		components: {
+		    XImg
 		},
 		props:{
 			petList:{
