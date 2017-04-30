@@ -212,14 +212,14 @@
 		          	position: relative;
 		          	font-weight: bold;
 		          	.name{
-		          		width: 1.6rem;
+		          		width: 2rem;
 		          	}
 		          	.sex{
 		          		font-weight: bolder;
 		          		font-size: 0.4rem;
 						position: absolute;
 						top:0.053333rem;
-						left: 1.6rem;
+						left: 2rem;
 		          	}
 		          	.icon-lanmeixingbienan{
 		          		color: #09ddf6;

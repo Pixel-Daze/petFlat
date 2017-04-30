@@ -21,14 +21,14 @@
 				  content: '宠物信息加载中',
 				  pullUpHeight: 60,
 				  height: 40,
-				  autoRefresh: false,
+				  autoRefresh: true,
 				  downContent: 'Release To Refresh',
 				  upContent: '',
-				  loadingContent: 'Loading...',
+				  loadingContent: '',
 				  clsPrefix: 'xs-plugin-pullup-'
 				},
 				page:1,
-				num:8
+				num:5
 			}
 		},
 		components:{
@@ -47,7 +47,8 @@
 				api.getPetListByPhone(body).then(resp=>{
 					if(resp.data.result == 0){
 						vm.PetList = resp.data.data
-						this.$nextTick(() => {
+						vm.page+=1
+		    			this.$nextTick(() => {
 					      this.$refs.scroller.reset({top: 0})
 					    })
 		    			this.$refs.scroller.donePullup()
@@ -83,14 +84,21 @@
 		    },
 		    loadData(){
 				let vm = this
-				
-				api.getPetList().then(resp=>{
+				let body = {
+					phone:JSON.parse(sessionStorage.getItem('user')).phone,
+					page:vm.page,
+					num:vm.num
+				}
+				api.getPetListByPhone(body).then(resp=>{
 		    		if(resp.data.result=='0'){
 		    			resp.data.data.forEach(item=>{
 		    				vm.PetList.push(item)
-		    				vm.$refs.scroller.reset()
+		    				this.$nextTick(() => {
+						      this.$refs.scroller.reset()
+						    })
 		    				vm.$refs.scroller.donePullup()
 		    			})
+		    			vm.page+=1
 		    		}
 		    	})
 			}
