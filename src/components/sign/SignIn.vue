@@ -3,7 +3,7 @@
 	<div class="signin">
 		<x-header class="vux-1px-b" :left-options="{backText: ''}" @on-click-back="back">登录<a slot="right" class="signUp" @click="signUp">注册</a></x-header>
 		<group>
-      		<x-input title="手机" name="mobile" placeholder="请输入手机号码" keyboard="number" v-model="signInForm.phone" is-type="china-mobile"></x-input>
+      		<x-input title="手机"  placeholder="请输入手机号码" v-model="signInForm.phone" ></x-input>
       		<x-input title="密码" placeholder="请输入密码" type="password" v-model="signInForm.password"></x-input>
     	</group>
     	<footer>
@@ -48,11 +48,11 @@
 			},
 			checkInfo(){
 				let vm = this
-				if(vm.signInForm.phone.length!=11){
+				if(vm.signInForm.phone.length!=11&&vm.signInForm.phone!='admin'){
 					this.$vux.toast.show({
-					 	text: '请输入正确的手机号',
-					 	width:'14em',
-					 	type: 'text'
+						text: '请输入正确的手机号',
+						width:'14em',
+						type: 'text'
 					})
 					return false
 				}else if(vm.signInForm.password.length == 0){
