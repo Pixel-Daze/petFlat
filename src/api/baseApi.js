@@ -68,6 +68,23 @@ export function getPetList(body){
 	})
 }
 
+// 根据关键词获取宠物信息列表
+export function getPetListBykey(body){
+	return new Promise((resolve,reject)=>{
+		axios({
+			method:'post',
+			url:API_ROOT+'search_pet_vague',
+			data:{
+				word:body.word,
+				page:body.page,
+				num:body.num
+			}
+		}).then((resp) =>{
+			resolve(resp)
+		},reject)
+	})
+}
+
 // 查询某个用户发布的宠物列表
 export function getPetListByPhone(body){
 	return new Promise((resolve,reject)=>{
