@@ -3,12 +3,15 @@
 		<index-header :user="user" :auth="auth"></index-header>
 		<div class="pet_container">
 			<search class="pet_search" @result-click="resultClick" placeholder="搜索宠物" :results="results" cancel-text="搜索" v-model="value" position="absolute" auto-scroll-to-top top="0px" @on-focus="onFocus" @on-cancel="getIndexList" :class="searchkey"></search>
-			<scroller lock-x scrollbar-y use-pullup @on-pullup-loading="loadData()" :pullup-config="pullup_config" ref="scroller">
-				<pet-list :petList="PetList" @choosePet="choosePet" @delelePet="delelePet"></pet-list>
-				
-			</scroller>
+			<!-- <div class="pet-list"> -->
+				<scroller lock-x scrollbar-y height="-128" use-pullup @on-pullup-loading="loadData()" :pullup-config="pullup_config" ref="scroller">
+					<pet-list :petList="PetList" @choosePet="choosePet" @delelePet="delelePet"></pet-list>
+					
+				</scroller>
+			<!-- </div> -->
+			
 		</div>
-		
+		<div class="bottom"></div>
 	</div>
 </template>
 <script>
@@ -35,11 +38,11 @@
 				  autoRefresh: false,
 				  downContent: 'Release To Refresh',
 				  upContent: '',
-				  loadingContent: 'Loading...',
+				  loadingContent: '',
 				  clsPrefix: 'xs-plugin-pullup-'
 				},
 				page:1,
-				num:8
+				num:5
 			}
 		},
 		methods: {
@@ -54,7 +57,6 @@
 		      this.searchkey['pet_search_focus'] = false
 		    },
 		    choosePet(item){
-		    	console.log(item)
 		    	this.$router.push({name:'PetDetail',params:{petCode:item.PetCode}})
 		    },
 		    delelePet(item){
@@ -94,6 +96,7 @@
 		    	api.getPetList(body).then(resp=>{
 		    		if(resp.data.result=='0'){
 		    			vm.PetList = resp.data.data
+		    			vm.page+=1
 		    			this.$nextTick(() => {
 					      this.$refs.scroller.reset({top: 0})
 					    })
@@ -113,14 +116,20 @@
 			// todo准备两种模式之间切换
 			loadData(){
 				let vm = this
-				
-				api.getPetList().then(resp=>{
+				let body = {
+		    		page:vm.page,
+		    		num:vm.num
+		    	}
+				api.getPetList(body).then(resp=>{
 		    		if(resp.data.result=='0'){
 		    			resp.data.data.forEach(item=>{
 		    				vm.PetList.push(item)
-		    				vm.$refs.scroller.reset()
+		    				this.$nextTick(() => {
+						      this.$refs.scroller.reset()
+						    })
 		    				vm.$refs.scroller.donePullup()
 		    			})
+		    			vm.page+=1
 		    		}
 		    	})
 			}
@@ -163,6 +172,14 @@
 			.pet_search_focus{
 				z-index: 13;
 			}
+			.pet-list{
+				height: calc( 100% - 107px );
+				overflow: hidden;
+			}
+		}
+		.bottom{
+			height: 63px;
+			width: 100%;
 		}
 		
 	}

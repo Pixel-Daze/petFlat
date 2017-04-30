@@ -2,7 +2,7 @@
 	<div>
 		<div class="pet-item" v-for="item in petList" @click="choosePet(item)">
 			<div class="pet-img">
-				<x-img :src="item.ImgUrl" :offset="-100" ></x-img>
+				<img :src="item.ImgUrl" ></img>
 			</div>
 			<div class="pet-info">
 				<div class="fullname">
