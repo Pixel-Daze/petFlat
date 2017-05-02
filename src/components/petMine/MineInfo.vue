@@ -21,7 +21,7 @@
 	          		<div class="tab-swiper vux-center" v-if="index == 1">
 	          			<div class="swipe-area"><label>地址：</label>{{user.area}}</div>
 	          			<div class="swipe-description"><label>简介：</label>{{user.description}}</div>
-	          			<footer v-if="phone!=user.phone">
+	          			<footer v-show="linkFlag">
 	          				<a class="phone" :href="link_phone">打电话</a>  
 					      	<a class="sms" :href="link_sms">发短信</a>
 					    </footer>
@@ -48,7 +48,8 @@
 				PetList:[],
 				link_phone:'',
 				link_sms:'',
-				phone:''
+				phone:'',
+				linkFlag:true
 			}
 		},
 		components:{
@@ -60,6 +61,10 @@
 		},
 		methods:{
 			loadInfo(){
+				if(sessionStorage.getItem('mineFlag')==null){
+					sessionStorage.setItem('mineFlag',true)
+					window.location.reload();
+				}
 				let vm = this
 				let body = {
 					phone:vm.$route.params.phone
@@ -70,6 +75,11 @@
 						vm.link_phone  = 'tel:'+vm.user.phone
 						vm.link_sms  = 'sms:'+vm.user.phone
 						vm.phone = JSON.parse(sessionStorage.getItem('user')).phone
+						if(vm.phone==vm.user.phone){
+							vm.linkFlag = false
+						}else{
+							vm.linkFlag = true
+						}
 					}
 				})
 				vm.getMinePet()
@@ -114,6 +124,10 @@
 		},
 		created(){
 			this.loadInfo()
+		},
+		beforeRouteLeave (to, from, next) {
+		    sessionStorage.removeItem('mineFlag')
+		    next()
 		}
 	}
 </script>
@@ -191,6 +205,7 @@
 	      bottom: 0;
 	      width: 100%;
 	      z-index: 100;
+	      height: 1.333333rem;
 	      a{
 	        height: 1.333333rem;
 	        line-height: 1.333333rem;
@@ -198,6 +213,7 @@
 	        font-size: 0.453333rem;
 	        color: #fff;
 	        width: 50%;
+	        display: block;
 	        float: left;
 	      }
 	      .phone{

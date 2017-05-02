@@ -103,8 +103,10 @@
 			},
 			findPublisher(phone){
 				let vm = this
+				// console.log(document.URL.split('#')[0]+'#/mineInfo/'+phone)
 				if(vm.isSignIn()){
-					vm.$router.push({name:'MineInfo',params:{phone:phone}})	
+					location.href=document.URL.split('#')[0]+'#/mineInfo/'+phone
+					// vm.$router.push({name:'MineInfo',params:{phone:phone}})	
 				}else{
 					vm.$vux.toast.show({
 						text: '请登录',
