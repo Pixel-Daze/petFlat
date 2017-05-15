@@ -1,17 +1,14 @@
 <!-- 登录模块 -->
 <template>
-	<div class="signin">
-		<x-header class="vux-1px-b" :left-options="{backText: ''}" @on-click-back="back">登录<a slot="right" class="signUp" @click="signUp">注册</a></x-header>
+	<div class="AdminSignIn">
+		<x-header class="vux-1px-b" :left-options="{backText: ''}" @on-click-back="back">管理员登录</x-header>
 		<group>
-      		<x-input title="手机" name="mobile" placeholder="请输入手机号码" keyboard="number" v-model="signInForm.phone" is-type="china-mobile"></x-input>
+      		<x-input title="账号"  placeholder="请输入账号" v-model="signInForm.phone" ></x-input>
       		<x-input title="密码" placeholder="请输入密码" type="password" v-model="signInForm.password"></x-input>
     	</group>
     	<footer>
     		<x-button class="btn-orange" @click.native="signin">确定</x-button>
 		</footer>
-		<div class="protocol">
-			<span @click="protocol">管理员登录</span>
-		</div>
 	</div>
 </template>
 <script>
@@ -33,9 +30,7 @@
 		    XButton
 		},
 		methods:{
-			signUp(){
-				this.$router.push({name:'SignUp'})
-			},
+			
 			signin(){
 				let vm = this
 				if(vm.checkInfo()){
@@ -51,9 +46,9 @@
 			},
 			checkInfo(){
 				let vm = this
-				if(vm.signInForm.phone.length!=11&&vm.signInForm.phone!='admin'){
+				if(vm.signInForm.phone!='admin'){
 					this.$vux.toast.show({
-						text: '请输入正确的手机号',
+						text: '请输入正确的帐号',
 						width:'14em',
 						type: 'text'
 					})
@@ -68,31 +63,18 @@
 				}else{
 					return true
 				}
-			},
-			// 查看协议
-			protocol(){
-				this.$router.push({name:'AdminSignIn'})
-			},
+			}
 		}
 	}
 </script>
 <style lang='scss'>
 	@import '../../../static/lib/base/config.scss';
-	.signin{
+	.AdminSignIn{
 		.signUp{
 			color: $primary-color !important;
 		}
 		footer{
 			margin:1.333333rem 0.28rem 0;
-		}
-		.protocol{
-			position: absolute;
-			text-align: center;
-			bottom: 0.266667rem;
-			width: 10.0rem;
-			span{
-				color: $primary-color;
-			}
 		}
 	}
 </style>

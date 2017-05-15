@@ -19,6 +19,7 @@ const ModifyPwd = resolve => require(['../components/petMine/ModifyPwd'],resolve
 
 
 const SignIn = resolve => require(['../components/sign/SignIn'],resolve)
+const AdminSignIn = resolve => require(['../components/sign/AdminSignIn'],resolve)
 const SignUp = resolve => require(['../components/sign/SignUp'],resolve)
 const Protocol = resolve => require(['../components/sign/Protocol'],resolve)
 
@@ -57,6 +58,7 @@ const router = new Router({
     	]},
       {name:'SignIn',path:'/signIn',component:SignIn},
       {name:'SignUp',path:'/signUp',component:SignUp},
+      {name:'AdminSignIn',path:'/adminSignIn',component:AdminSignIn},
       {name:'MinePublish',path:'/minePublish',component:MinePublish},
       {name:'MineCollect',path:'/mineCollect',component:MineCollect},
       {name:'Protocol',path:'/protocol',component:Protocol},
