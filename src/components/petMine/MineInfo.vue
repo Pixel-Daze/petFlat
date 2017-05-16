@@ -12,7 +12,7 @@
 				<span v-if="user.area">{{user.area}}</span>
 			</div>
 		</div>
-		<div class="info-swiper">
+		<div class="info-swiper" v-show="auth!=3">
 	       	<tab :line-width=2 active-color='#fd655a' v-model="index">
 	        	<tab-item class="vux-center" :selected="selected === item" v-for="(item, index) in list" @click="selected = item" :key="index">{{item}}</tab-item>
 	      	</tab>
@@ -49,7 +49,8 @@
 				link_phone:'',
 				link_sms:'',
 				phone:'',
-				linkFlag:true
+				linkFlag:true,
+				auth:''
 			}
 		},
 		components:{
@@ -69,6 +70,7 @@
 				let body = {
 					phone:vm.$route.params.phone
 				}
+				vm.auth = JSON.parse(sessionStorage.getItem('user')).auth
 				api.getuserInfo(body).then(resp=>{
 					if(resp.data.result == '0'){
 						vm.user = resp.data.data
