@@ -7,7 +7,7 @@
 			<img :src="user.userIcon" alt="">
 		</div>
 		<div class="title">矮乐多宠物领养平台</div>
-		<div class="addPet" @click="addPet">
+		<div class="addPet" @click="addPet" v-show="user.auth!='3'">
 			<span class="icon iconfont icon-bianji"></span>
 		</div>
 	</header>

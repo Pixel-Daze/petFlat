@@ -2,7 +2,7 @@
 	<div class="petDetail">
 		<x-header class="vux-1px-b fix-header" :left-options="{backText: ''}" @on-click-back="back">宠物详情</x-header>
 		<div class="pet_container">
-			<span class="star icon iconfont" :class="{starLight:star,'icon-star1':star,'icon-star':!star}" @click.stop="starPet"></span>
+			<span v-show="auth!='3'" class="star icon iconfont" :class="{starLight:star,'icon-star1':star,'icon-star':!star}" @click.stop="starPet"></span>
 			<pet-swiper :swipe="swipe" :activityOption="activityOption"></pet-swiper>
 			<div class="pet-info vux-1px-b">
 				<div class="fullname">
@@ -65,7 +65,8 @@
 	            },
 	            petInfo:{},
 	            publisher:{},
-	            star:false
+	            star:false,
+	            auth:''
 			}
 		},
 		components:{
@@ -91,6 +92,7 @@
 				// 查询是否收藏
 				if(vm.isSignIn()){
 					vm.findStar()
+					vm.auth = JSON.parse(sessionStorage.getItem('user')).auth
 				}
 			},
 			getuserInfo(body){

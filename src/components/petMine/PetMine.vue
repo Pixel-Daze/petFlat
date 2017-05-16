@@ -30,7 +30,7 @@
 				<span class="icon iconfont icon-back"></span>
 			</div>
 		</div>
-		<group class="mine_opt">
+		<group class="mine_opt" v-show="user.auth!='3'">
 		    <cell title="我的发布" is-link @click.native="goMinePublish">
 		    	<span slot="icon" class="icon iconfont icon-maobi"></span>
 		    </cell>
