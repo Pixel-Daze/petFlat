@@ -34,7 +34,7 @@
 			signin(){
 				let vm = this
 				if(vm.checkInfo()){
-					api.signin(vm.signInForm).then(resp=>{
+					api.admin_login(vm.signInForm).then(resp=>{
 						if(resp.data.result == '0'){
 							let info = JSON.stringify(resp.data.data)
 							sessionStorage.setItem('user',info)

@@ -40,17 +40,33 @@
 						newpwd:vm.newpwd,
 						phone:JSON.parse(sessionStorage.getItem('user')).phone
 					}
-					api.modifyPwd(body).then(resp=>{
-						if(resp.data.result == '0'){
-							vm.$vux.alert.show({
-						        title: '提示',
-						        content: '修改密码成功',
-						        onHide () {
-						           vm.$router.push({name:'PetMine'})
-						        }
-						    })
-						}
-					})
+					let auth = JSON.parse(sessionStorage.getItem('user')).auth
+					if(auth == '3'){
+						api.modify_change_admin_password(body).then(resp=>{
+							if(resp.data.result == '0'){
+								vm.$vux.alert.show({
+							        title: '提示',
+							        content: '修改密码成功',
+							        onHide () {
+							           vm.$router.push({name:'PetMine'})
+							        }
+							    })
+							}
+						})
+					}else{
+						api.modifyPwd(body).then(resp=>{
+							if(resp.data.result == '0'){
+								vm.$vux.alert.show({
+							        title: '提示',
+							        content: '修改密码成功',
+							        onHide () {
+							           vm.$router.push({name:'PetMine'})
+							        }
+							    })
+							}
+						})
+					}
+					
 				}
 			},
 			checkInfo(){

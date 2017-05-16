@@ -9,7 +9,7 @@
 					<div class="name">{{item.PetName}}</div>
 					<span v-if="item.PetSex == '1'" class="sex icon iconfont icon-lanmeixingbienan"></span>
 					<span v-if="item.PetSex == '0'" class="sex icon iconfont icon-lanmeixingbienv"></span>
-					<span class="delete" v-if="item.phone == phone||phone=='admin'" @click.stop="delelePet(item)">删除</span>
+					<span class="delete" v-if="item.phone == phone||auth=='3'" @click.stop="delelePet(item)">删除</span>
 				</div>
 				<div class="description">
 					<span v-for="feature in item.PetFeature">{{feature}}</span>
@@ -27,7 +27,8 @@
 	export default{
 		data(){
 			return {
-				phone:''
+				phone:'',
+				auth:''
 			}
 		},
 		components: {
@@ -50,6 +51,7 @@
 				let vm = this
 				if(vm.isSignIn()){
 					vm.phone = JSON.parse(sessionStorage.getItem('user')).phone
+					vm.auth = JSON.parse(sessionStorage.getItem('user')).auth
 				}
 			}
 		},

@@ -149,6 +149,22 @@ export function signin(body) {
 	})
 }
 
+// 管理员登录
+export function admin_login(body){
+	return new Promise((resolve,reject)=>{
+		axios({
+			method:'post',
+			url:API_ROOT+'admin_login',
+			data:{
+				phone:body.phone,
+				password:body.password
+			}
+		}).then((resp) =>{
+			resolve(resp)
+		},reject)
+	})
+}
+
 // 根据用户phone获取用户信息
 export function getuserInfo(body) {
 	return new Promise((resolve,reject)=>{
@@ -244,6 +260,24 @@ export function modifyPwd(body){
 		axios({
 			method:'post',
 			url:API_ROOT+'change_password',
+			data:{
+				oldpwd:body.oldpwd,
+				newpwd:body.newpwd,
+				phone:body.phone
+			}
+		}).then((resp) =>{
+			resolve(resp)
+		},reject)
+	})
+}
+
+// 修改管理员密码
+
+export function modify_change_admin_password(body){
+	return new Promise((resolve,reject)=>{
+		axios({
+			method:'post',
+			url:API_ROOT+'change_admin_password',
 			data:{
 				oldpwd:body.oldpwd,
 				newpwd:body.newpwd,
